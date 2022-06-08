@@ -14,8 +14,7 @@ type Mysql struct {
 }
 
 func (m *Mysql) Dsn() string {
-	//return m.Username + ":" + m.Password + "@tcp(" + m.Path + ":" + m.Port + ")/" + m.Dbname + "?" + m.Config
-	return "root:12345678@tcp(127.0.0.1:3306)/community?charset=utf8mb4&parseTime=True&loc=Local"
+	return m.Username + ":" + m.Password + "@tcp(" + m.Path + ":" + m.Port + ")/" + m.Dbname + "?" + m.Config
 }
 
 func (m *Mysql) GetLogMode() string {

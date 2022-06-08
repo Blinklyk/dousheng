@@ -84,7 +84,7 @@ func JWTAuthMiddleware() func(c *gin.Context) {
 // RedisParseToken redis parse token version
 // key:login:session:"+tokenStr, value:user TTL:10min
 func RedisParseToken(tokenStr string) (string, error) {
-	res := global.DY_REDIS.Get(context.Background(), global.REDIS_USER_PREFIX+tokenStr)
+	res := global.App.DY_REDIS.Get(context.Background(), global.REDIS_USER_PREFIX+tokenStr)
 	log.Println("jwt check from redis:", res)
 	UserStr := res.Val()
 	// if token already expired, abort
@@ -92,6 +92,6 @@ func RedisParseToken(tokenStr string) (string, error) {
 		return "", errors.New("error: parse token ")
 	}
 	// if token in use, then refresh the TTL˜
-	global.DY_REDIS.Expire(context.Background(), global.REDIS_USER_PREFIX+tokenStr, global.REDIS_USER_TTL)
+	global.App.DY_REDIS.Expire(context.Background(), global.REDIS_USER_PREFIX+tokenStr, global.REDIS_USER_TTL)
 	return UserStr, nil
 }

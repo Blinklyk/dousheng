@@ -38,7 +38,7 @@ func Follow(userInfoVar *model.User, actionVar *request.RelationActionRequest) e
 
 	// transaction: 1. if the table have the relation record; 2. determine the status column and set the toUser status 3. insert in follow table; 4. insert into follower table；
 	// 5. user follow + 1 toUser follower + 1; 6. update userInfo in redis
-	tx := global.DY_DB.Begin()
+	tx := global.App.DY_DB.Begin()
 
 	// 1. if the table have the relation record;
 	// check db first
@@ -123,12 +123,12 @@ func CancelFollow(userInfoVar *model.User, actionVar *request.RelationActionRequ
 	// 5. user follow + 1 toUser follower + 1; 6. update userInfo in redis
 
 	// 1. if the table have the relation record;
-	tx := global.DY_DB.Begin()
+	tx := global.App.DY_DB.Begin()
 
 	// check db var
 	var followVar model.Follow
 	// check follow table has the corresponding follow record
-	res := global.DY_DB.Model(&model.Follow{}).Where("user_id = ? AND follow_id = ?", userInfoVar.ID, actionVar.ToUserID).Find(&followVar)
+	res := global.App.DY_DB.Model(&model.Follow{}).Where("user_id = ? AND follow_id = ?", userInfoVar.ID, actionVar.ToUserID).Find(&followVar)
 
 	// if no relation data
 	if res.RowsAffected == 0 {
@@ -187,12 +187,12 @@ func (us *RelationService) FollowList(r *request.FollowListRequest) (userList []
 	// get follow user from follow table
 	var followIDList []int64
 	// query follow as a list in follow table
-	if err := global.DY_DB.Table("dy_follow").Distinct("follow_id").Where("user_id = ? AND deleted_at is null", r.UserID).Find(&followIDList).Error; err != nil {
+	if err := global.App.DY_DB.Table("dy_follow").Distinct("follow_id").Where("user_id = ? AND deleted_at is null", r.UserID).Find(&followIDList).Error; err != nil {
 		return nil, err
 	}
 	log.Printf("%v\n", followIDList)
 	// get follow user info from user table
-	if err := global.DY_DB.Model(&model.User{}).Where("id in ?", followIDList).Find(&userList).Error; err != nil {
+	if err := global.App.DY_DB.Model(&model.User{}).Where("id in ?", followIDList).Find(&userList).Error; err != nil {
 		return nil, err
 	}
 
@@ -207,19 +207,19 @@ func (us *RelationService) FollowList(r *request.FollowListRequest) (userList []
 func (us *RelationService) FollowerList(r *request.FollowerListRequest) (userList []model.User, err error) {
 	var followerIDList []int64
 	// query follower as a list in follow table
-	if err := global.DY_DB.Table("dy_follower").Distinct("follower_id").Where("user_id = ? AND deleted_at is null", r.UserID).Find(&followerIDList).Error; err != nil {
+	if err := global.App.DY_DB.Table("dy_follower").Distinct("follower_id").Where("user_id = ? AND deleted_at is null", r.UserID).Find(&followerIDList).Error; err != nil {
 		return nil, err
 	}
 	log.Printf("%v\n", followerIDList)
 	// get follow user info from user table
-	if err := global.DY_DB.Model(&model.User{}).Where("id in ?", followerIDList).Find(&userList).Error; err != nil {
+	if err := global.App.DY_DB.Model(&model.User{}).Where("id in ?", followerIDList).Find(&userList).Error; err != nil {
 		return nil, err
 	}
 	// traverse the user list
 	for i := 0; i < len(userList); i++ {
 		// check the status column in follower table
 		var f model.Follower
-		if err := global.DY_DB.Select("Status").Where("user_id = ? AND follower_id = ?", r.UserID, userList[i].ID).First(&f).Error; err != nil {
+		if err := global.App.DY_DB.Select("Status").Where("user_id = ? AND follower_id = ?", r.UserID, userList[i].ID).First(&f).Error; err != nil {
 			return nil, err
 		}
 		if f.Status == true {

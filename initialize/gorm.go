@@ -1,25 +1,25 @@
 package initialize
 
 import (
+	"github.com/RaymondCode/simple-demo/global"
 	"github.com/RaymondCode/simple-demo/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
-	"log"
 	"os"
 )
 
-// 可切换数据源
 func Gorm() *gorm.DB {
-
+	m := global.App.DY_CONFIG.Mysql
 	// TODO use switch and case as below comment shows
 	db, err := gorm.Open(mysql.New(mysql.Config{
-		DSN:                       "root:12345678@tcp(127.0.0.1:3306)/dy_database?charset=utf8mb4&parseTime=True&loc=Local", // DSN data source name
-		DefaultStringSize:         191,                                                                                      // string 类型字段的默认长度
-		DisableDatetimePrecision:  true,                                                                                     // 禁用 datetime 精度，MySQL 5.6 之前的数据库不支持
-		DontSupportRenameIndex:    true,                                                                                     // 重命名索引时采用删除并新建的方式，MySQL 5.7 之前的数据库和 MariaDB 不支持重命名索引
-		DontSupportRenameColumn:   true,                                                                                     // 用 `change` 重命名列，MySQL 8 之前的数据库和 MariaDB 不支持重命名列
-		SkipInitializeWithVersion: false,                                                                                    // 根据当前 MySQL 版本自动配置
+		//DSN:                       "root:12345678@tcp(127.0.0.1:3306)/dy_database?charset=utf8mb4&parseTime=True&loc=Local", // DSN data source name
+		DSN:                       m.Dsn(),
+		DefaultStringSize:         191,   // string 类型字段的默认长度
+		DisableDatetimePrecision:  true,  // 禁用 datetime 精度，MySQL 5.6 之前的数据库不支持
+		DontSupportRenameIndex:    true,  // 重命名索引时采用删除并新建的方式，MySQL 5.7 之前的数据库和 MariaDB 不支持重命名索引
+		DontSupportRenameColumn:   true,  // 用 `change` 重命名列，MySQL 8 之前的数据库和 MariaDB 不支持重命名列
+		SkipInitializeWithVersion: false, // 根据当前 MySQL 版本自动配置
 	}), &gorm.Config{
 		SkipDefaultTransaction: false, // 默认false
 		NamingStrategy: schema.NamingStrategy{
@@ -27,23 +27,16 @@ func Gorm() *gorm.DB {
 			SingularTable: true,  // 启用单数表名，
 		},
 		DisableForeignKeyConstraintWhenMigrating: true, // 是否关闭逻辑外键 （代码自动外键关系）
-
 	})
 	if err != nil {
-		log.Println(err)
+		global.App.DY_LOG.Error(err.Error())
 		return nil
 	}
+	sqlDB, _ := db.DB()
+	sqlDB.SetMaxIdleConns(m.MaxIdleConns) // 设置最大连接数
+	sqlDB.SetMaxOpenConns(m.MaxOpenConns) // 设置最大可空闲连接数
 	return db
 
-	//switch global.DY_CONFIG.System.DbType {
-	//case "mysql":
-	//	log.Println("choose mysql")
-	//	return GormMysql()
-	//case "pgsql":
-	//return GormPgSql()
-	//default:
-	//	return GormMysql()
-	//}
 }
 
 func RegisterTables(db *gorm.DB) {
@@ -57,7 +50,8 @@ func RegisterTables(db *gorm.DB) {
 		model.Follower{},
 	)
 	if err != nil {
+		global.App.DY_LOG.Error(err.Error())
 		os.Exit(0)
 	}
-	log.Println("register table success")
+	global.App.DY_LOG.Info("register table success")
 }
