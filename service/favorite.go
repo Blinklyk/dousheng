@@ -33,7 +33,7 @@ func (fs *FavoriteService) FavoriteAction(u *model.User, r *request.FavoriteRequ
 	if actionType == "1" {
 
 		// check if add already
-		res := global.DY_DB.Where("user_id = ? AND video_id = ?", userID, videoID).First(&model.Favorite{})
+		res := global.App.DY_DB.Where("user_id = ? AND video_id = ?", userID, videoID).First(&model.Favorite{})
 		if res.RowsAffected != 0 {
 			return errors.New("already add favorite this video")
 		}
@@ -42,7 +42,7 @@ func (fs *FavoriteService) FavoriteAction(u *model.User, r *request.FavoriteRequ
 		// 1. create data in user_favorite_video table
 		// 2. update favorite_count in videos table
 		AddFavorite := func(x *gorm.DB) error {
-			tx := global.DY_DB.Begin()
+			tx := global.App.DY_DB.Begin()
 
 			if err := tx.Create(&favoriteInfo).Error; err != nil {
 				tx.Rollback()
@@ -62,7 +62,7 @@ func (fs *FavoriteService) FavoriteAction(u *model.User, r *request.FavoriteRequ
 			return err
 		}
 
-		err := AddFavorite(global.DY_DB)
+		err := AddFavorite(global.App.DY_DB)
 		if err != nil {
 			return errors.New("error when adding favorite: " + err.Error())
 		}
@@ -70,7 +70,7 @@ func (fs *FavoriteService) FavoriteAction(u *model.User, r *request.FavoriteRequ
 
 	if actionType == "2" {
 		// check if delete already
-		res := global.DY_DB.Where("user_id = ? AND video_id = ?", userID, videoID).First(&model.Favorite{})
+		res := global.App.DY_DB.Where("user_id = ? AND video_id = ?", userID, videoID).First(&model.Favorite{})
 		if res.RowsAffected == 0 {
 			return errors.New("err: No add favorite this video before")
 		}
@@ -79,7 +79,7 @@ func (fs *FavoriteService) FavoriteAction(u *model.User, r *request.FavoriteRequ
 		// 1. delete data in user_favorite_video table  (soft delete)
 		// 2. update favorite_count in videos table
 		CancelFavorite := func(x *gorm.DB) error {
-			tx := global.DY_DB.Begin()
+			tx := global.App.DY_DB.Begin()
 
 			if err := tx.Delete(&model.Favorite{}, "user_id = ? AND video_id = ?", userID, videoIDNum).Error; err != nil {
 				log.Println("error when delete u_f_v :", err)
@@ -98,7 +98,7 @@ func (fs *FavoriteService) FavoriteAction(u *model.User, r *request.FavoriteRequ
 			return err
 		}
 
-		err := CancelFavorite(global.DY_DB)
+		err := CancelFavorite(global.App.DY_DB)
 		if err != nil {
 			return errors.New("error when canceling favorite: " + err.Error())
 		}
@@ -113,12 +113,12 @@ func (fs *FavoriteService) FavoriteList(r *request.FavoriteListRequest) (favorit
 	var videosID []int64
 	// get video_id from conn table first
 	// use distinct instead of select, and check if the deleted_at column is null
-	if err := global.DY_DB.Table("dy_favorite").Distinct("video_id").Where("user_id = ? AND deleted_at is null", userID).Find(&videosID).Error; err != nil {
+	if err := global.App.DY_DB.Table("dy_favorite").Distinct("video_id").Where("user_id = ? AND deleted_at is null", userID).Find(&videosID).Error; err != nil {
 		return nil, err
 	}
 
 	// get video details from video table by selecting video_id
-	if err := global.DY_DB.Model(&model.Video{}).Where("ID in ?", videosID).Preload("User").Find(&favoriteVideoList).Error; err != nil {
+	if err := global.App.DY_DB.Model(&model.Video{}).Where("ID in ?", videosID).Preload("User").Find(&favoriteVideoList).Error; err != nil {
 		return nil, errors.New("get videos from derived videosID" + err.Error())
 	}
 

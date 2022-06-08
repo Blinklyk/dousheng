@@ -13,5 +13,5 @@ func main() {
 	}
 	r := gin.Default()
 	initRouter(r)
-	r.Run(":" + global.App.Config.App.Port)
+	r.Run(":" + global.App.DY_CONFIG.App.Port)
 }

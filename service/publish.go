@@ -33,7 +33,7 @@ func (ps *PublishService) PublishAction(u *model.User, r *request.PublishRequest
 		IsFavorite:    false,
 	}
 
-	if result := global.DY_DB.Model(&model.Video{}).Create(&publishVideo); result.RowsAffected == 0 {
+	if result := global.App.DY_DB.Model(&model.Video{}).Create(&publishVideo); result.RowsAffected == 0 {
 		return errors.New("publish error")
 	}
 	return nil
@@ -41,7 +41,7 @@ func (ps *PublishService) PublishAction(u *model.User, r *request.PublishRequest
 
 // PublishList return the publishing video list
 func (ps *PublishService) PublishList(r *request.PublishListRequest) (publishVideos []model.Video, err error) {
-	if err := global.DY_DB.Where("user_id = ?", r.UserID).Preload("User").Order("ID desc").Find(&publishVideos).Error; err != nil {
+	if err := global.App.DY_DB.Where("user_id = ?", r.UserID).Preload("User").Order("ID desc").Find(&publishVideos).Error; err != nil {
 		return nil, err
 	}
 	// add is_favorite and is_follow value

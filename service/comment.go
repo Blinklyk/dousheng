@@ -19,7 +19,7 @@ func (cs *CommentService) CommentAction(u *model.User, r *request.CommentRequest
 	commentText := r.CommentText
 	videoIDNum, _ := strconv.ParseInt(videoID, 10, 64)
 	// 1. create data in comment table; 2. corresponding video comment_count + 1
-	tx := global.DY_DB.Begin()
+	tx := global.App.DY_DB.Begin()
 
 	// get full user data
 	userService := UserService{}
@@ -57,7 +57,7 @@ func (cs *CommentService) CommentAction(u *model.User, r *request.CommentRequest
 // DeleteCommentAction delete comment
 func (cs *CommentService) DeleteCommentAction(r *request.CommentRequest) error {
 	videoID := r.VideoID
-	tx := global.DY_DB.Begin()
+	tx := global.App.DY_DB.Begin()
 	commentID := r.CommentID
 	// 1. delete comment in comment table
 	if res := tx.Delete(&model.Comment{}, "id = ? AND video_id = ?", commentID, videoID); res.RowsAffected == 0 {
@@ -80,14 +80,14 @@ func (cs *CommentService) DeleteCommentAction(r *request.CommentRequest) error {
 func (cs *CommentService) CommentList(u model.User, r *request.CommentListRequest) (*[]model.Comment, error) {
 	videoID := r.VideoID
 	var commentList []model.Comment
-	if err := global.DY_DB.Model(&model.Comment{}).Where("video_id = ?", videoID).Preload("User").Find(&commentList).Error; err != nil {
+	if err := global.App.DY_DB.Model(&model.Comment{}).Where("video_id = ?", videoID).Preload("User").Find(&commentList).Error; err != nil {
 		return nil, errors.New("get comment list when db select error")
 	}
 
 	// add is_follow value to the comment list
 	for i := 0; i < len(commentList); i++ {
 		var temp model.Follow
-		if res := global.DY_DB.Model(&model.Follow{}).Where("user_id = ? AND follow_id = ?", u.ID, commentList[i].UserID).First(&temp); res.RowsAffected != 0 {
+		if res := global.App.DY_DB.Model(&model.Follow{}).Where("user_id = ? AND follow_id = ?", u.ID, commentList[i].UserID).First(&temp); res.RowsAffected != 0 {
 			commentList[i].User.IsFollow = true
 		}
 	}

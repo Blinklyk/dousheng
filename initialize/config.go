@@ -29,12 +29,12 @@ func InitializeConfig() *viper.Viper {
 	v.OnConfigChange(func(in fsnotify.Event) {
 		fmt.Println("config file changed:", in.Name)
 		// 重载配置
-		if err := v.Unmarshal(&global.App.Config); err != nil {
+		if err := v.Unmarshal(&global.App.DY_CONFIG); err != nil {
 			fmt.Println(err)
 		}
 	})
 	// 将配置赋值给全局变量
-	if err := v.Unmarshal(&global.App.Config); err != nil {
+	if err := v.Unmarshal(&global.App.DY_CONFIG); err != nil {
 		fmt.Println(err)
 	}
 

@@ -11,6 +11,6 @@ func InitSession() {
 	if err != nil {
 		panic("session init error")
 	}
-	global.DY_SESSION_STORE = store
+	global.App.DY_SESSION_STORE = store
 	log.Println("init session successfully")
 }

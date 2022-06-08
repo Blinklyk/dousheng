@@ -6,7 +6,7 @@ app:
 
 
 redis:
-  DB: 1
+  DB: 0
   Addr: 127.0.0.1:6379
   Password:
 
@@ -16,5 +16,39 @@ jwt:
   BufferTime:       # 缓冲时间
   Issuer: "douyin-demo" #签发人
   JwtBlacklistGracePeriod: 10 # 黑名单宽限时间
+
+log:
+  level: info # 日志等级
+  root_dir: ./storage/logs # 日志根目录
+  filename: douyin.log # 日志文件名称
+  format: console # 写入格式 可选json
+  show_line: true # 是否显示调用行
+  max_backups: 3 # 旧文件的最大个数
+  max_size: 500 # 日志文件最大大小（MB）
+  max_age: 28 # 旧文件的最大保留天数
+  compress: true # 是否压缩
+
+mysql:
+  path: 127.0.0.1
+  port: "3306"
+  config: charset=utf8mb4&parseTime=True&loc=Local
+  db-name: dy_database
+  username: root
+  password: "12345678"
+  max-idle-conns: 10
+  max-open-conns: 100
+  log-mode: error
+  log-zap: false
+
+qiniu:
+  zone: ZoneBeimei
+  bucket: "douyin-demo"
+  img-path: ""
+  use-https: false
+  access-key: "j7dRF1sA0b9y0u4ltGCWUnFRrmCBsP5V6XEOarJ1"
+  secret-key: "0RN1xvNRmkZo-zd6GznEccBc_MH9-i1n5tzpBPWw"
+  use-cdn-domains: false
+
+
 
 

@@ -8,12 +8,13 @@ import (
 
 func InitializeRedis() *redis.Client {
 	client := redis.NewClient(&redis.Options{
-		Addr:     global.App.Config.Redis.Addr,
-		Password: global.App.Config.Redis.Password, // no password set
-		DB:       global.App.Config.Redis.DB,       // use default DB
+		Addr:     global.App.DY_CONFIG.Redis.Addr,
+		Password: global.App.DY_CONFIG.Redis.Password, // no password set
+		DB:       global.App.DY_CONFIG.Redis.DB,       // use default DB
 	})
 	_, err := client.Ping(context.Background()).Result()
 	if err != nil {
+		global.App.DY_LOG.Error(err.Error())
 		return nil
 	}
 	return client
