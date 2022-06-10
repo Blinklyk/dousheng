@@ -7,6 +7,7 @@ import (
 	"github.com/RaymondCode/simple-demo/model/request"
 	"github.com/RaymondCode/simple-demo/model/response"
 	"github.com/RaymondCode/simple-demo/service"
+	"github.com/RaymondCode/simple-demo/utils/verify"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -29,6 +30,12 @@ func Publish(c *gin.Context) {
 
 	// bind request var
 	var publicRequest request.PublishRequest
+	//verify
+	if err := verify.Publish(publicRequest); err != nil {
+		c.JSON(http.StatusBadRequest, Response{1, "非法数据"})
+		return
+	}
+
 	if err := c.ShouldBind(&publicRequest); err != nil {
 		c.JSON(http.StatusBadRequest, Response{StatusCode: 1, StatusMsg: "bind error " + err.Error()})
 		return
@@ -67,7 +74,7 @@ func PublishList(c *gin.Context) {
 	UserStr, _ := c.Get("UserStr")
 	log.Println("UserStr: ", UserStr)
 
-	var userInfoVar model.User
+	var userInfoVar response.UserInfo
 	if err := json.Unmarshal([]byte(UserStr.(string)), &userInfoVar); err != nil {
 		log.Println(err)
 		c.JSON(http.StatusOK, response.Response{StatusCode: 1, StatusMsg: "error: session unmarshal error"})

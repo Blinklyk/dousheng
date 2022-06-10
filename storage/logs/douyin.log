@@ -1,0 +1,58 @@
+[2022-06-08 17:01:36.128]	local.info	initialize/init.go:15	log init success!
+
+[2022-06-09 10:29:48.051]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 10:59:18.967]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 11:01:56.172]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 11:26:59.084]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 11:38:31.121]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 11:39:42.465]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 13:13:03.392]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 14:07:52.115]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 15:01:10.231]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 15:22:36.161]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 15:33:13.211]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 16:05:56.240]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 16:07:35.742]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 16:14:28.197]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 16:18:39.094]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 16:33:47.119]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 16:35:48.643]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 16:38:29.313]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 16:40:47.279]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 16:41:55.573]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 16:48:12.474]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 16:49:59.131]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 16:53:15.501]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 16:56:21.041]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 16:57:22.588]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 15:45:07.460]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 19:21:04.837]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 19:22:43.090]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 19:23:09.725]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 19:44:11.585]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 19:48:10.227]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 19:48:15.681]	local.error	service/user.go:106	error information 
+[2022-06-10 20:00:25.465]	local.error	service/user.go:106	error information 
+[2022-06-10 20:44:37.185]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 20:48:13.412]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 20:59:48.456]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 21:02:23.905]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 21:04:59.726]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 21:05:33.130]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 21:16:11.108]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 21:28:54.849]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 21:31:36.036]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 21:36:57.141]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 21:38:05.451]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 21:41:17.095]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 21:49:48.822]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 21:55:52.901]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 22:10:27.317]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 22:11:05.415]	local.info	initialize/gorm.go:56	register table success
+
+[2022-06-09 08:58:59.016]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 08:59:15.457]	local.info	utils/oss.go:51	bucket: douyin-demokey: root/public/bear.mp4Hash: FskLRKlu0IDBpsjOiIikClqqp-fKName: null
+[2022-06-09 09:00:20.899]	local.info	initialize/gorm.go:56	register table success
+[2022-06-09 09:00:26.458]	local.info	utils/oss.go:50	bucket: douyin-demokey: root/public/bear.mp4Hash: FskLRKlu0IDBpsjOiIikClqqp-fKName: null
+[2022-06-09 09:00:26.459]	local.info	utils/oss.go:54	Publish video url: http://rceumi5re.bkt.gdipper.comroot/public/bear.mp4
+[2022-06-10 08:12:34.262]	local.info	initialize/gorm.go:56	register table success
