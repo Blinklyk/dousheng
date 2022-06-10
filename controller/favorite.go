@@ -6,6 +6,7 @@ import (
 	"github.com/RaymondCode/simple-demo/model/request"
 	"github.com/RaymondCode/simple-demo/model/response"
 	"github.com/RaymondCode/simple-demo/service"
+	"github.com/RaymondCode/simple-demo/utils/verify"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -27,6 +28,11 @@ func FavoriteAction(c *gin.Context) {
 	var favoriteRequest request.FavoriteRequest
 	if err := c.ShouldBind(&favoriteRequest); err != nil {
 		c.JSON(http.StatusBadRequest, Response{StatusCode: 1, StatusMsg: "bind error "})
+		return
+	}
+	//verify
+	if err := verify.Favorite(favoriteRequest); err != nil {
+		c.JSON(http.StatusBadRequest, Response{1, "非法数据"})
 		return
 	}
 

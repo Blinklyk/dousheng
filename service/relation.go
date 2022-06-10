@@ -2,9 +2,11 @@ package service
 
 import (
 	"errors"
+	"fmt"
 	"github.com/RaymondCode/simple-demo/global"
 	"github.com/RaymondCode/simple-demo/model"
 	"github.com/RaymondCode/simple-demo/model/request"
+	"github.com/RaymondCode/simple-demo/model/response"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 	"log"
@@ -183,13 +185,14 @@ func CancelFollow(userInfoVar *model.User, actionVar *request.RelationActionRequ
 }
 
 // FollowList get current user's follow list from db
-func (us *RelationService) FollowList(r *request.FollowListRequest) (userList []model.User, err error) {
+func (us *RelationService) FollowList(r *request.FollowListRequest) (userList []response.UserInfo, err error) {
 	// get follow user from follow table
 	var followIDList []int64
 	// query follow as a list in follow table
 	if err := global.App.DY_DB.Table("dy_follow").Distinct("follow_id").Where("user_id = ? AND deleted_at is null", r.UserID).Find(&followIDList).Error; err != nil {
 		return nil, err
 	}
+	fmt.Println(followIDList)
 	log.Printf("%v\n", followIDList)
 	// get follow user info from user table
 	if err := global.App.DY_DB.Model(&model.User{}).Where("id in ?", followIDList).Find(&userList).Error; err != nil {
@@ -204,7 +207,7 @@ func (us *RelationService) FollowList(r *request.FollowListRequest) (userList []
 }
 
 // FollowerList get current user's follower list from db
-func (us *RelationService) FollowerList(r *request.FollowerListRequest) (userList []model.User, err error) {
+func (us *RelationService) FollowerList(r *request.FollowerListRequest) (userList []response.UserInfo, err error) {
 	var followerIDList []int64
 	// query follower as a list in follow table
 	if err := global.App.DY_DB.Table("dy_follower").Distinct("follower_id").Where("user_id = ? AND deleted_at is null", r.UserID).Find(&followerIDList).Error; err != nil {
