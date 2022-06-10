@@ -48,6 +48,7 @@ qiniu:
   access-key: "j7dRF1sA0b9y0u4ltGCWUnFRrmCBsP5V6XEOarJ1"
   secret-key: "0RN1xvNRmkZo-zd6GznEccBc_MH9-i1n5tzpBPWw"
   use-cdn-domains: false
+  domain: "http://rceumi5re.bkt.gdipper.com"
 
 
 

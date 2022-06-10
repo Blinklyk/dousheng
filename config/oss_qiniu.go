@@ -8,4 +8,5 @@ type Qiniu struct {
 	AccessKey     string `mapstructure:"access-key" json:"access-key" yaml:"access-key"`                // 秘钥AK
 	SecretKey     string `mapstructure:"secret-key" json:"secret-key" yaml:"secret-key"`                // 秘钥SK
 	UseCdnDomains bool   `mapstructure:"use-cdn-domains" json:"use-cdn-domains" yaml:"use-cdn-domains"` // 上传是否使用CDN上传加速
+	Domain        string `mapstructure:"domain" json:"domain" yaml:"domain"`                            // 访问域名
 }
