@@ -77,7 +77,7 @@ func PublishList(c *gin.Context) {
 	// authentication
 	UserStr, _ := c.Get("UserStr")
 
-	var userInfoVar response.UserInfo
+	var userInfoVar model.User
 	if err := json.Unmarshal([]byte(UserStr.(string)), &userInfoVar); err != nil {
 		global.App.DY_LOG.Error("session unmarshal error", zap.Error(err))
 		c.JSON(http.StatusOK, response.Response{StatusCode: 1, StatusMsg: "error: session unmarshal error"})

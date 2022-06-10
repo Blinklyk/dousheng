@@ -116,14 +116,12 @@ func UserInfo(c *gin.Context) {
 
 	// DTO
 	userinfo := response.UserInfo{
-		ID:             returnUser.ID,
-		Name:           returnUser.Name,
-		FollowCount:    returnUser.FollowCount,
-		FollowerCount:  returnUser.FollowerCount,
-		IsFollow:       returnUser.IsFollow,
-		Username:       returnUser.Username,
-		Videos:         returnUser.Videos,
-		FavoriteVideos: returnUser.FavoriteVideos,
+		ID:            returnUser.ID,
+		Name:          returnUser.Name,
+		FollowCount:   returnUser.FollowCount,
+		FollowerCount: returnUser.FollowerCount,
+		IsFollow:      returnUser.IsFollow,
+		Username:      returnUser.Username,
 	}
 	c.JSON(http.StatusOK, response.UserInfoResponse{
 		Response: response.Response{StatusCode: 0},

@@ -67,3 +67,7 @@
 [2022-06-10 17:17:01.133]	local.info	initialize/gorm.go:56	register table success
 [2022-06-10 17:23:55.177]	local.info	initialize/gorm.go:56	register table success
 [2022-06-10 17:26:22.741]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 17:29:48.776]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 17:33:38.937]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 17:37:37.500]	local.info	initialize/gorm.go:56	register table success
+[2022-06-10 17:53:26.667]	local.info	initialize/gorm.go:56	register table success
