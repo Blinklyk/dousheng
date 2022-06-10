@@ -90,7 +90,7 @@ func Publish(publishRequest request.PublishRequest) (err error) {
 	if publishRequest.Title == "" {
 		return fmt.Errorf("标题不能为空")
 	}
-	return
+	return nil
 }
 func Relation(request request.RelationActionRequest) (err error) {
 	if err := isNum(request.ToUserID); err != nil {

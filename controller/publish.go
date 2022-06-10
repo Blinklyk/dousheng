@@ -9,7 +9,7 @@ import (
 	"github.com/RaymondCode/simple-demo/service"
 	"github.com/RaymondCode/simple-demo/utils/verify"
 	"github.com/gin-gonic/gin"
-	"log"
+	"go.uber.org/zap"
 	"net/http"
 	"path/filepath"
 )
@@ -19,19 +19,23 @@ func Publish(c *gin.Context) {
 
 	// authentication
 	UserStr, _ := c.Get("UserStr")
-	log.Println("UserStr: ", UserStr)
 
 	var userInfoVar model.User
 	if err := json.Unmarshal([]byte(UserStr.(string)), &userInfoVar); err != nil {
-		log.Println(err)
+		global.App.DY_LOG.Error("session unmarshal error", zap.Error(err))
 		c.JSON(http.StatusOK, Response{StatusCode: 1, StatusMsg: "error: session unmarshal error"})
 		return
 	}
 
 	// bind request var
 	var publicRequest request.PublishRequest
-	//verify
+	if err := c.ShouldBind(&publicRequest); err != nil {
+		c.JSON(http.StatusBadRequest, Response{StatusCode: 1, StatusMsg: "bind error " + err.Error()})
+		return
+	}
+	// verify
 	if err := verify.Publish(publicRequest); err != nil {
+		global.App.DY_LOG.Error(publicRequest.Title, zap.Error(err))
 		c.JSON(http.StatusBadRequest, Response{1, "非法数据"})
 		return
 	}
@@ -72,11 +76,10 @@ func PublishList(c *gin.Context) {
 
 	// authentication
 	UserStr, _ := c.Get("UserStr")
-	log.Println("UserStr: ", UserStr)
 
 	var userInfoVar response.UserInfo
 	if err := json.Unmarshal([]byte(UserStr.(string)), &userInfoVar); err != nil {
-		log.Println(err)
+		global.App.DY_LOG.Error("session unmarshal error", zap.Error(err))
 		c.JSON(http.StatusOK, response.Response{StatusCode: 1, StatusMsg: "error: session unmarshal error"})
 		return
 	}

@@ -24,11 +24,14 @@ func CommentAction(c *gin.Context) {
 		return
 	}
 
-	// TODO verify
 	// bind request var
 	var commentRequest request.CommentRequest
+	if err := c.ShouldBind(&commentRequest); err != nil {
+		c.JSON(http.StatusBadRequest, Response{StatusCode: 1, StatusMsg: "bind error " + err.Error()})
+		return
+	}
 
-	//verify
+	// verify
 	if err := verify.Comment(commentRequest); err != nil {
 		c.JSON(http.StatusBadRequest, response.Response{StatusCode: 1, StatusMsg: "非法数据 "})
 		return
