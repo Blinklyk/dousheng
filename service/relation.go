@@ -2,6 +2,7 @@ package service
 
 import (
 	"errors"
+	"fmt"
 	"github.com/RaymondCode/simple-demo/global"
 	"github.com/RaymondCode/simple-demo/model"
 	"github.com/RaymondCode/simple-demo/model/request"
@@ -191,6 +192,7 @@ func (us *RelationService) FollowList(r *request.FollowListRequest) (userList []
 	if err := global.App.DY_DB.Table("dy_follow").Distinct("follow_id").Where("user_id = ? AND deleted_at is null", r.UserID).Find(&followIDList).Error; err != nil {
 		return nil, err
 	}
+	fmt.Println(followIDList)
 	log.Printf("%v\n", followIDList)
 	// get follow user info from user table
 	if err := global.App.DY_DB.Model(&model.User{}).Where("id in ?", followIDList).Find(&userList).Error; err != nil {

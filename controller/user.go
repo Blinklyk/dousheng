@@ -7,6 +7,7 @@ import (
 	"github.com/RaymondCode/simple-demo/model/response"
 	"github.com/RaymondCode/simple-demo/service"
 	"github.com/RaymondCode/simple-demo/utils"
+	"github.com/RaymondCode/simple-demo/utils/verify"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -17,6 +18,12 @@ func Register(c *gin.Context) {
 	var r request.RegisterRequest
 	if err := c.ShouldBind(&r); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	//verify
+	if err := verify.Resgin(r); err != nil {
+		c.JSON(http.StatusBadRequest, response.Response{1, err.Error()})
 		return
 	}
 
@@ -47,7 +54,13 @@ func Login(c *gin.Context) {
 	// bind request var
 	var l request.LoginRequest
 	if err := c.ShouldBind(&l); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, Response{1, "bind error"})
+		return
+	}
+
+	//verify
+	if err := verify.Login(l); err != nil {
+		c.JSON(http.StatusBadRequest, Response{1, err.Error()})
 		return
 	}
 
@@ -89,7 +102,7 @@ func UserInfo(c *gin.Context) {
 		return
 	}
 
-	// TODO check
+	// check
 	if len(userInfoVar.Name) < 3 {
 		c.JSON(http.StatusOK, response.UserInfoResponse{
 			Response: response.Response{StatusCode: 1, StatusMsg: "userName len less then 3"},
@@ -127,6 +140,7 @@ func UserInfo(c *gin.Context) {
 	//	Videos:         returnUser.Videos,
 	//	FavoriteVideos: returnUser.FavoriteVideos,
 	//})
+
 	userinfo := response.UserInfo{
 		ID:             returnUser.ID,
 		Name:           returnUser.Name,

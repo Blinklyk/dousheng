@@ -6,6 +6,7 @@ import (
 	"github.com/RaymondCode/simple-demo/model/request"
 	"github.com/RaymondCode/simple-demo/model/response"
 	"github.com/RaymondCode/simple-demo/service"
+	"github.com/RaymondCode/simple-demo/utils/verify"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -26,6 +27,13 @@ func CommentAction(c *gin.Context) {
 	// TODO verify
 	// bind request var
 	var commentRequest request.CommentRequest
+
+	//verify
+	if err := verify.Comment(commentRequest); err != nil {
+		c.JSON(http.StatusBadRequest, response.Response{StatusCode: 1, StatusMsg: "非法数据 "})
+		return
+	}
+
 	if err := c.ShouldBind(&commentRequest); err != nil {
 		c.JSON(http.StatusBadRequest, response.Response{StatusCode: 1, StatusMsg: "bind error "})
 		return
