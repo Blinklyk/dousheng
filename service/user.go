@@ -4,22 +4,56 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/RaymondCode/simple-demo/global"
 	"github.com/RaymondCode/simple-demo/model"
 	"github.com/RaymondCode/simple-demo/utils"
 	"gorm.io/gorm"
 	"log"
+	"regexp"
 )
 
 type UserService struct{}
 
+//密码强度必须为字⺟⼤⼩写+数字+符号，8位以上
+func CheckPasswordLever(ps string) error {
+	if len(ps) < 8 {
+		return fmt.Errorf("password len is < 9")
+	}
+	num := `[0-9]{1}`
+	a_z := `[a-z]{1}`
+	A_Z := `[A-Z]{1}`
+	if b, err := regexp.MatchString(num, ps); !b || err != nil {
+		return fmt.Errorf("", err)
+	}
+	if b, err := regexp.MatchString(a_z, ps); !b || err != nil {
+		return fmt.Errorf("password need a_z ")
+	}
+	if b, err := regexp.MatchString(A_Z, ps); !b || err != nil {
+		return fmt.Errorf("password need A_Z")
+	}
+	return nil
+}
+
 // Register user register and store to db
 func (us *UserService) Register(user *model.User) (err error, newUser *model.User) {
+	//校验：账号是否符合规范
+	if result, _ := regexp.MatchString(`^([\w\.\_\-]{2,10})@(\w{1,}).([a-z]{2,4})$`, user.Username); !result {
+		return errors.New("Please enter the correct mailbox"), user
+	}
+	if result, _ := regexp.MatchString(`^([\w\.\_\-]{2,10})@(\w{1,}).([a-z]{2,4})$`, user.Username); !result {
+		return errors.New("Please enter the correct mailbox"), user
+	}
+	//校验：密码是否符合规范
+	if err := CheckPasswordLever(user.Password); err != nil {
+		return err, user
+	}
 	// 校验 查询数据库中是否有此用户(高级查询)
 	var u model.User
 	if !errors.Is(global.App.DY_DB.Model(&model.User{}).Where("username = ?", user.Username).First(&u).Error, gorm.ErrRecordNotFound) {
 		return errors.New("this username is registered already"), user
 	}
+
 	// 雪花算法生成新的id
 	//var node, _ = utils.NewWorker(1)
 	//newID := node.GetId()

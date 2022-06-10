@@ -67,7 +67,7 @@ func PublishList(c *gin.Context) {
 	UserStr, _ := c.Get("UserStr")
 	log.Println("UserStr: ", UserStr)
 
-	var userInfoVar model.User
+	var userInfoVar response.UserInfo
 	if err := json.Unmarshal([]byte(UserStr.(string)), &userInfoVar); err != nil {
 		log.Println(err)
 		c.JSON(http.StatusOK, response.Response{StatusCode: 1, StatusMsg: "error: session unmarshal error"})

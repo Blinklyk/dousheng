@@ -50,7 +50,5 @@ func (ps *PublishService) PublishList(r *request.PublishListRequest) (publishVid
 		return nil, errors.New("error: conv userID to int64 ")
 	}
 	VideoListAppendInfo(publishVideos, userIDNum)
-
 	return
-
 }

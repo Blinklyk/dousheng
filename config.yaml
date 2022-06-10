@@ -8,7 +8,7 @@ app:
 redis:
   DB: 0
   Addr: 127.0.0.1:6379
-  Password:
+  Password: 
 
 jwt:
   SigningKey: "secret key"
@@ -34,7 +34,7 @@ mysql:
   config: charset=utf8mb4&parseTime=True&loc=Local
   db-name: dy_database
   username: root
-  password: "12345678"
+  password: "root"
   max-idle-conns: 10
   max-open-conns: 100
   log-mode: error
