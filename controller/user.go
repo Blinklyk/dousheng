@@ -102,7 +102,7 @@ func UserInfo(c *gin.Context) {
 		return
 	}
 
-	// check
+	// verify
 	if len(userInfoVar.Name) < 3 {
 		c.JSON(http.StatusOK, response.UserInfoResponse{
 			Response: response.Response{StatusCode: 1, StatusMsg: "userName len less then 3"},
@@ -142,14 +142,12 @@ func UserInfo(c *gin.Context) {
 	//})
 
 	userinfo := response.UserInfo{
-		ID:             returnUser.ID,
-		Name:           returnUser.Name,
-		FollowCount:    returnUser.FollowCount,
-		FollowerCount:  returnUser.FollowerCount,
-		IsFollow:       returnUser.IsFollow,
-		Username:       returnUser.Username,
-		Videos:         returnUser.Videos,
-		FavoriteVideos: returnUser.FavoriteVideos,
+		ID:            returnUser.ID,
+		Name:          returnUser.Name,
+		FollowCount:   returnUser.FollowCount,
+		FollowerCount: returnUser.FollowerCount,
+		IsFollow:      returnUser.IsFollow,
+		Username:      returnUser.Username,
 	}
 	c.JSON(http.StatusOK, response.UserInfoResponse{
 		Response: response.Response{StatusCode: 0},

@@ -13,7 +13,7 @@ func Gorm() *gorm.DB {
 	m := global.App.DY_CONFIG.Mysql
 	// TODO use switch and case as below comment shows
 	db, err := gorm.Open(mysql.New(mysql.Config{
-		//DSN:                       "root:12345678@tcp(127.0.0.1:3306)/dy_database?charset=utf8mb4&parseTime=True&loc=Local", // DSN data source name
+		//DSN:                       "root:root@tcp(127.0.0.1:3306)/dy_database?charset=utf8mb4&parseTime=True&loc=Local", // DSN data source name
 		DSN:                       m.Dsn(),
 		DefaultStringSize:         191,   // string 类型字段的默认长度
 		DisableDatetimePrecision:  true,  // 禁用 datetime 精度，MySQL 5.6 之前的数据库不支持

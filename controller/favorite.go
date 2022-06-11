@@ -67,6 +67,12 @@ func FavoriteList(c *gin.Context) {
 		return
 	}
 
+	//verify
+	if err := verify.IsNum(favoriteListRequest.UserID); err != nil {
+		c.JSON(http.StatusBadRequest, Response{1, err.Error()})
+		return
+	}
+
 	// call service
 	fs := service.FavoriteService{}
 	favoriteVideoList, err := fs.FavoriteList(&favoriteListRequest)

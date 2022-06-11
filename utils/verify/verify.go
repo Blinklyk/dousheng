@@ -12,7 +12,7 @@ func oneOrTwo(num string) (err error) {
 	}
 	return fmt.Errorf("操作类型错误")
 }
-func isNum(num string) (err error) {
+func IsNum(num string) (err error) {
 	if result, _ := regexp.MatchString(`^[0-9]*$`, num); !result {
 		return fmt.Errorf("应该全部都为数字")
 	}
@@ -69,7 +69,7 @@ func Login(login request.LoginRequest) (err error) {
 	return nil
 }
 func Comment(commentRequest request.CommentRequest) (err error) {
-	if err := isNum(commentRequest.VideoID); err != nil {
+	if err := IsNum(commentRequest.VideoID); err != nil {
 		return fmt.Errorf("视频ID错误")
 	}
 	if err := oneOrTwo(commentRequest.ActionType); err != nil {
@@ -78,7 +78,7 @@ func Comment(commentRequest request.CommentRequest) (err error) {
 	return
 }
 func Favorite(favoriteRequest request.FavoriteRequest) (err error) {
-	if err := isNum(favoriteRequest.VideoID); err != nil {
+	if err := IsNum(favoriteRequest.VideoID); err != nil {
 		return err
 	}
 	if err := oneOrTwo(favoriteRequest.ActionType); err != nil {
@@ -93,7 +93,7 @@ func Publish(publishRequest request.PublishRequest) (err error) {
 	return
 }
 func Relation(request request.RelationActionRequest) (err error) {
-	if err := isNum(request.ToUserID); err != nil {
+	if err := IsNum(request.ToUserID); err != nil {
 		return fmt.Errorf("对方用户不合法")
 	}
 	if err := oneOrTwo(request.ActionType); err != nil {

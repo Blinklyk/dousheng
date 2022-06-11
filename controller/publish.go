@@ -30,14 +30,14 @@ func Publish(c *gin.Context) {
 
 	// bind request var
 	var publicRequest request.PublishRequest
-	//verify
-	if err := verify.Publish(publicRequest); err != nil {
-		c.JSON(http.StatusBadRequest, Response{1, "非法数据"})
+	if err := c.ShouldBind(&publicRequest); err != nil {
+		c.JSON(http.StatusBadRequest, Response{StatusCode: 1, StatusMsg: "bind error " + err.Error()})
 		return
 	}
 
-	if err := c.ShouldBind(&publicRequest); err != nil {
-		c.JSON(http.StatusBadRequest, Response{StatusCode: 1, StatusMsg: "bind error " + err.Error()})
+	//verify
+	if err := verify.Publish(publicRequest); err != nil {
+		c.JSON(http.StatusBadRequest, Response{1, "非法数据"})
 		return
 	}
 
@@ -85,6 +85,11 @@ func PublishList(c *gin.Context) {
 	var publishListRequest request.PublishListRequest
 	if err := c.ShouldBind(&publishListRequest); err != nil {
 		c.JSON(http.StatusBadRequest, Response{StatusCode: 1, StatusMsg: "bind error " + err.Error()})
+		return
+	}
+
+	if err := verify.IsNum(publishListRequest.UserID); err != nil {
+		c.JSON(http.StatusBadRequest, Response{1, err.Error()})
 		return
 	}
 
