@@ -50,7 +50,7 @@ func UploadFile(localPath string) (string, error) {
 	global.App.DY_LOG.Info("bucket: " + ret.Bucket + "key: " + ret.Key + "Hash: " + ret.Hash + "Name: " + ret.Name)
 
 	// get url: oss domain + ret.key
-	VideoUrl := global.App.DY_CONFIG.Qiniu.Domain + ret.Key
+	VideoUrl := global.App.DY_CONFIG.Qiniu.Domain + "/" + ret.Key
 	global.App.DY_LOG.Info("Publish video url: " + VideoUrl)
 	return VideoUrl, nil
 }

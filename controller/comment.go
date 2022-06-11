@@ -26,11 +26,11 @@ func CommentAction(c *gin.Context) {
 
 	// bind request var
 	var commentRequest request.CommentRequest
-
 	if err := c.ShouldBind(&commentRequest); err != nil {
-		c.JSON(http.StatusBadRequest, response.Response{StatusCode: 1, StatusMsg: "bind error "})
+		c.JSON(http.StatusBadRequest, Response{StatusCode: 1, StatusMsg: "bind error " + err.Error()})
 		return
 	}
+
 
 	//verify
 	if err := verify.Comment(commentRequest); err != nil {

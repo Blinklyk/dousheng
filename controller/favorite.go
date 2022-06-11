@@ -30,6 +30,7 @@ func FavoriteAction(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, Response{StatusCode: 1, StatusMsg: "bind error "})
 		return
 	}
+
 	//verify
 	if err := verify.Favorite(favoriteRequest); err != nil {
 		c.JSON(http.StatusBadRequest, Response{1, "非法数据"})

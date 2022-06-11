@@ -9,7 +9,7 @@ import (
 	"github.com/RaymondCode/simple-demo/service"
 	"github.com/RaymondCode/simple-demo/utils/verify"
 	"github.com/gin-gonic/gin"
-	"log"
+	"go.uber.org/zap"
 	"net/http"
 	"path/filepath"
 )
@@ -19,11 +19,10 @@ func Publish(c *gin.Context) {
 
 	// authentication
 	UserStr, _ := c.Get("UserStr")
-	log.Println("UserStr: ", UserStr)
 
 	var userInfoVar model.User
 	if err := json.Unmarshal([]byte(UserStr.(string)), &userInfoVar); err != nil {
-		log.Println(err)
+		global.App.DY_LOG.Error("session unmarshal error", zap.Error(err))
 		c.JSON(http.StatusOK, Response{StatusCode: 1, StatusMsg: "error: session unmarshal error"})
 		return
 	}
@@ -72,11 +71,10 @@ func PublishList(c *gin.Context) {
 
 	// authentication
 	UserStr, _ := c.Get("UserStr")
-	log.Println("UserStr: ", UserStr)
 
-	var userInfoVar response.UserInfo
+	var userInfoVar model.User
 	if err := json.Unmarshal([]byte(UserStr.(string)), &userInfoVar); err != nil {
-		log.Println(err)
+		global.App.DY_LOG.Error("session unmarshal error", zap.Error(err))
 		c.JSON(http.StatusOK, response.Response{StatusCode: 1, StatusMsg: "error: session unmarshal error"})
 		return
 	}
