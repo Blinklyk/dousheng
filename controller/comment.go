@@ -31,14 +31,10 @@ func CommentAction(c *gin.Context) {
 		return
 	}
 
-	// verify
+
+	//verify
 	if err := verify.Comment(commentRequest); err != nil {
 		c.JSON(http.StatusBadRequest, response.Response{StatusCode: 1, StatusMsg: "非法数据 "})
-		return
-	}
-
-	if err := c.ShouldBind(&commentRequest); err != nil {
-		c.JSON(http.StatusBadRequest, response.Response{StatusCode: 1, StatusMsg: "bind error "})
 		return
 	}
 
@@ -86,6 +82,12 @@ func CommentList(c *gin.Context) {
 	var commentListRequest request.CommentListRequest
 	if err := c.ShouldBind(&commentListRequest); err != nil {
 		c.JSON(http.StatusBadRequest, Response{StatusCode: 1, StatusMsg: "bind error "})
+		return
+	}
+
+	//verify
+	if err := verify.IsNum(commentListRequest.VideoID); err != nil {
+		c.JSON(http.StatusBadRequest, Response{1, err.Error()})
 		return
 	}
 

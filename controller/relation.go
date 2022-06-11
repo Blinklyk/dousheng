@@ -26,22 +26,19 @@ func RelationAction(c *gin.Context) {
 	}
 
 	var relationActionRequest request.RelationActionRequest
+
 	if err := c.ShouldBind(&relationActionRequest); err != nil {
 		c.JSON(http.StatusBadRequest, Response{StatusCode: 1, StatusMsg: "bind error"})
 		return
 	}
 
+	// verify
 	if err := verify.Relation(relationActionRequest); err != nil {
 		c.JSON(http.StatusBadRequest, Response{1, err.Error()})
 		return
 	}
-	if err := c.ShouldBind(&relationActionRequest); err != nil {
-		c.JSON(http.StatusBadRequest, Response{StatusCode: 1, StatusMsg: "bind error"})
-		return
-	}
-	log.Printf("%v\n", relationActionRequest)
 
-	// verify
+	log.Printf("%v\n", relationActionRequest)
 
 	// cannot follow myself
 	if relationActionRequest.ToUserID == strconv.Itoa(int(userInfoVar.ID)) {
@@ -76,6 +73,11 @@ func FollowList(c *gin.Context) {
 		return
 	}
 
+	if err := verify.IsNum(followListRequest.UserID); err != nil {
+		c.JSON(http.StatusBadRequest, Response{1, err.Error()})
+		return
+	}
+
 	relationService := &service.RelationService{}
 	followList, err := relationService.FollowList(&followListRequest)
 	if err != nil {
@@ -105,6 +107,11 @@ func FollowerList(c *gin.Context) {
 	var followerListRequest request.FollowerListRequest
 	if err := c.ShouldBind(&followerListRequest); err != nil {
 		c.JSON(http.StatusBadRequest, Response{StatusCode: 1, StatusMsg: "bind error"})
+		return
+	}
+
+	if err := verify.IsNum(followerListRequest.UserID); err != nil {
+		c.JSON(http.StatusBadRequest, Response{1, err.Error()})
 		return
 	}
 

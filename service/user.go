@@ -6,6 +6,7 @@ import (
 	"errors"
 	"github.com/RaymondCode/simple-demo/global"
 	"github.com/RaymondCode/simple-demo/model"
+	"github.com/RaymondCode/simple-demo/model/response"
 	"github.com/RaymondCode/simple-demo/utils"
 	"gorm.io/gorm"
 	"log"
@@ -89,8 +90,8 @@ func (us *UserService) Login(user *model.User) (returnUser *model.User, tokenStr
 }
 
 // GetUserInfo get full latest userInfo from db (follow_count + follower_count + is_followed)
-func (us *UserService) GetUserInfo(userID int64, toUserID int64) (returnUser *model.User, err error) {
-	var u model.User
+func (us *UserService) GetUserInfo(userID int64, toUserID int64) (returnUser *response.UserInfo, err error) {
+	var u response.UserInfo
 	// get user basic info from user table
 	if errors.Is(global.App.DY_DB.Model(&model.User{}).Where("id = ?", userID).First(&u).Error, gorm.ErrRecordNotFound) {
 		return nil, errors.New("user doesn't exist")

@@ -6,13 +6,14 @@ import (
 	"github.com/RaymondCode/simple-demo/global"
 	"github.com/RaymondCode/simple-demo/model"
 	"github.com/RaymondCode/simple-demo/model/request"
+	"github.com/RaymondCode/simple-demo/model/response"
 	"github.com/RaymondCode/simple-demo/utils"
 )
 
 type FeedService struct{}
 
 // FeedWithToken get video information with token
-func (fs *FeedService) FeedWithToken(r *request.FeedRequest) (*[]model.Video, error) {
+func (fs *FeedService) FeedWithToken(r *request.FeedRequest) (*[]response.Video, error) {
 	// parse token
 	UserStr, err := utils.RedisParseToken(r.Token)
 	if err != nil {
@@ -40,7 +41,7 @@ func (fs *FeedService) FeedWithToken(r *request.FeedRequest) (*[]model.Video, er
 }
 
 // FeedWithoutToken get video information without token
-func (fs *FeedService) FeedWithoutToken() (*[]model.Video, error) {
+func (fs *FeedService) FeedWithoutToken() (*[]response.Video, error) {
 	videos, err := selectVideos()
 	if err != nil {
 		return nil, err
@@ -49,9 +50,9 @@ func (fs *FeedService) FeedWithoutToken() (*[]model.Video, error) {
 }
 
 // get videos from db with the latest time
-func selectVideos() ([]model.Video, error) {
+func selectVideos() ([]response.Video, error) {
 	// TODO add the latest time
-	var videos []model.Video
+	var videos []response.Video
 	if err := global.App.DY_DB.Preload("User").Order("ID desc").Find(&videos).Error; err != nil {
 		return nil, errors.New("error: select without token")
 	}

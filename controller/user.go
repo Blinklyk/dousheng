@@ -106,6 +106,7 @@ func UserInfo(c *gin.Context) {
 		return
 	}
 
+
 	// call service
 	var checkUserInfoService = service.UserService{}
 	returnUser, err := checkUserInfoService.GetUserInfo(userInfoVar.ID, userInfoVar.ID)

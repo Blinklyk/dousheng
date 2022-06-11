@@ -1,13 +1,28 @@
 package response
 
-import "github.com/RaymondCode/simple-demo/model"
+import (
+	"gorm.io/gorm"
+	"time"
+)
+
+type CommonInfo struct {
+	ID         int64          `gorm:"primarykey"` // 主键ID
+	CreatedAt  time.Time      // 创建时间
+	UpdatedAt  time.Time      // 更新时间
+	DeletedAt  gorm.DeletedAt `gorm:"index" json:"-"`
+	UserID     int64          `json:"user_id" `
+	User       UserInfo       `json:"user" gorm:"foreignKey:UserID"`
+	VideoID    int64          `json:"video_id"`
+	Content    string         `json:"content"`
+	CreateData string         `json:"create_data"`
+}
 
 type CommentActionResponse struct {
 	Response
-	Comment model.Comment `json:"comment"`
+	Comment CommonInfo `json:"comment"`
 }
 
 type CommentListResponse struct {
 	Response
-	CommentList []model.Comment `json:"comment_list"`
+	CommentList []CommonInfo `json:"comment_list"`
 }

@@ -5,6 +5,7 @@ import (
 	"github.com/RaymondCode/simple-demo/global"
 	"github.com/RaymondCode/simple-demo/model"
 	"github.com/RaymondCode/simple-demo/model/request"
+	"github.com/RaymondCode/simple-demo/model/response"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 	"strconv"
@@ -14,7 +15,7 @@ import (
 type CommentService struct{}
 
 // CommentAction add comment return new comment
-func (cs *CommentService) CommentAction(u *model.User, r *request.CommentRequest) (*model.Comment, error) {
+func (cs *CommentService) CommentAction(u *model.User, r *request.CommentRequest) (*response.CommonInfo, error) {
 	videoID := r.VideoID
 	commentText := r.CommentText
 	videoIDNum, _ := strconv.ParseInt(videoID, 10, 64)
@@ -27,7 +28,7 @@ func (cs *CommentService) CommentAction(u *model.User, r *request.CommentRequest
 	if err != nil {
 		return nil, errors.New("error: return user from getUserInfo")
 	}
-	commentVar := &model.Comment{
+	commentVar := &response.CommonInfo{
 		UserID:     u.ID,
 		VideoID:    videoIDNum,
 		Content:    commentText,
@@ -77,9 +78,9 @@ func (cs *CommentService) DeleteCommentAction(r *request.CommentRequest) error {
 }
 
 // CommentList get comment list
-func (cs *CommentService) CommentList(u model.User, r *request.CommentListRequest) (*[]model.Comment, error) {
+func (cs *CommentService) CommentList(u model.User, r *request.CommentListRequest) (*[]response.CommonInfo, error) {
 	videoID := r.VideoID
-	var commentList []model.Comment
+	var commentList []response.CommonInfo
 	if err := global.App.DY_DB.Model(&model.Comment{}).Where("video_id = ?", videoID).Preload("User").Find(&commentList).Error; err != nil {
 		return nil, errors.New("get comment list when db select error")
 	}
