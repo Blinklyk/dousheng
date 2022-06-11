@@ -2,7 +2,11 @@ package utils
 
 import (
 	"context"
+	"encoding/base64"
 	"fmt"
+	"path/filepath"
+	"strings"
+
 	"github.com/RaymondCode/simple-demo/global"
 	"github.com/qiniu/go-sdk/v7/auth/qbox"
 	"github.com/qiniu/go-sdk/v7/storage"
@@ -23,10 +27,22 @@ func UploadFile(localPath string) *MyPutRet {
 	secretKey := global.App.DY_CONFIG.Qiniu.SecretKey
 
 	localFile := localPath
+
+	filename := filepath.Base(localFile)
+
+	indexOfDot := strings.LastIndex(filename, ".")
+	prevfix := filename[0 : indexOfDot-1]
+	coverName := prevfix + "." + "jpg"
+
+	photoKey := "root/cover" + coverName //封面的访问路径，我们通过此路径在七牛云空间中定位封面
+	entry := global.App.DY_CONFIG.Qiniu.Bucket + ":" + photoKey
+	encodedEntryURI := base64.StdEncoding.EncodeToString([]byte(entry))
+
 	// storage space name
 	putPolicy := storage.PutPolicy{
-		Scope:      global.App.DY_CONFIG.Qiniu.Bucket,
-		ReturnBody: `{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}`,
+		Scope:         global.App.DY_CONFIG.Qiniu.Bucket,
+		PersistentOps: "vframe/jpg/offset/1|saveas/" + encodedEntryURI, //取视频第1秒的截图
+		ReturnBody:    `{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}`,
 	}
 	mac := qbox.NewMac(accessKey, secretKey)
 	upToken := putPolicy.UploadToken(mac)

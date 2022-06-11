@@ -2,20 +2,25 @@ package controller
 
 import (
 	"encoding/json"
+	"fmt"
+	"log"
+	"net/http"
+	"path/filepath"
+	"strconv"
+	"strings"
+
+	"github.com/bwmarrin/snowflake"
+
 	"github.com/RaymondCode/simple-demo/global"
 	"github.com/RaymondCode/simple-demo/model"
 	"github.com/RaymondCode/simple-demo/model/request"
 	"github.com/RaymondCode/simple-demo/model/response"
 	"github.com/RaymondCode/simple-demo/service"
 	"github.com/gin-gonic/gin"
-	"log"
-	"net/http"
-	"path/filepath"
 )
 
 // Publish check token then save upload file to public directory
 func Publish(c *gin.Context) {
-
 	// authentication
 	UserStr, _ := c.Get("UserStr")
 	log.Println("UserStr: ", UserStr)
@@ -41,6 +46,25 @@ func Publish(c *gin.Context) {
 		return
 	}
 	filename := filepath.Base(data.Filename)
+	indexOfDot := strings.LastIndex(filename, ".") // get suffix index
+	if indexOfDot < 0 {
+		log.Println("error: can't get suffix")
+		return
+	}
+	suffix := filename[indexOfDot+1 : len(filename)]
+	suffix = strings.ToLower(suffix)
+
+	// generate newfilename
+	node, err := snowflake.NewNode(1)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	filename = strconv.FormatInt(node.Generate().Int64(), 10)
+	filename = filename + "." + suffix
+
+	log.Println("filename: ", filename)
 
 	localFilePath := filepath.Join(global.LOCAL_FILE_PATH_PREFIX, filename)
 	if err := c.SaveUploadedFile(data, localFilePath); err != nil {

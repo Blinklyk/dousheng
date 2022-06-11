@@ -1,20 +1,21 @@
 package initialize
 
 import (
+	"os"
+
 	"github.com/RaymondCode/simple-demo/global"
 	"github.com/RaymondCode/simple-demo/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
-	"os"
 )
 
 func Gorm() *gorm.DB {
 	m := global.App.DY_CONFIG.Mysql
 	// TODO use switch and case as below comment shows
 	db, err := gorm.Open(mysql.New(mysql.Config{
-		//DSN:                       "root:12345678@tcp(127.0.0.1:3306)/dy_database?charset=utf8mb4&parseTime=True&loc=Local", // DSN data source name
-		DSN:                       m.Dsn(),
+		DSN: "root:123456@tcp(127.0.0.1:3306)/dy_base?charset=utf8mb4&parseTime=True&loc=Local", // DSN data source name
+		//DSN:                       m.Dsn(),
 		DefaultStringSize:         191,   // string 类型字段的默认长度
 		DisableDatetimePrecision:  true,  // 禁用 datetime 精度，MySQL 5.6 之前的数据库不支持
 		DontSupportRenameIndex:    true,  // 重命名索引时采用删除并新建的方式，MySQL 5.7 之前的数据库和 MariaDB 不支持重命名索引
