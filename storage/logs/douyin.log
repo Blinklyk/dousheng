@@ -121,3 +121,20 @@
 [2022-06-11 18:53:32.754]	local.info	utils/oss.go:50	bucket: douyin-demokey: root/public/bear.mp4Hash: FskLRKlu0IDBpsjOiIikClqqp-fKName: null
 [2022-06-11 18:53:32.756]	local.info	utils/oss.go:54	Publish video url: http://rceumi5re.bkt.gdipper.com/root/public/bear.mp4
 [2022-06-11 19:03:57.399]	local.info	initialize/gorm.go:56	register table success
+[2022-06-12 12:37:16.370]	local.info	initialize/gorm.go:56	register table success
+[2022-06-12 12:37:52.012]	local.info	utils/oss.go:50	bucket: douyin-demokey: root/public/bear.mp4Hash: FskLRKlu0IDBpsjOiIikClqqp-fKName: null
+[2022-06-12 12:37:52.012]	local.info	utils/oss.go:54	Publish video url: http://rceumi5re.bkt.gdipper.com/root/public/bear.mp4
+[2022-06-12 12:50:56.140]	local.info	initialize/gorm.go:56	register table success
+[2022-06-12 12:51:07.452]	local.info	utils/oss.go:50	bucket: douyin-demokey: root/public/bear.mp4Hash: FskLRKlu0IDBpsjOiIikClqqp-fKName: null
+[2022-06-12 12:51:07.452]	local.info	utils/oss.go:54	Publish video url: http://rceumi5re.bkt.gdipper.com/root/public/bear.mp4
+[2022-06-12 12:54:10.277]	local.info	initialize/gorm.go:56	register table success
+[2022-06-12 12:58:35.788]	local.info	utils/oss.go:50	bucket: douyin-demokey: root/public/bear.mp4Hash: FskLRKlu0IDBpsjOiIikClqqp-fKName: null
+[2022-06-12 12:58:35.789]	local.info	utils/oss.go:54	Publish video url: http://rceumi5re.bkt.gdipper.com/root/public/bear.mp4
+[2022-06-12 13:00:38.533]	local.info	initialize/gorm.go:56	register table success
+[2022-06-12 13:03:02.447]	local.info	initialize/gorm.go:56	register table success
+[2022-06-12 13:07:01.814]	local.info	initialize/gorm.go:56	register table success
+[2022-06-12 13:21:07.231]	local.info	initialize/gorm.go:56	register table success
+[2022-06-12 13:26:11.913]	local.info	initialize/gorm.go:56	register table success
+[2022-06-12 13:27:43.083]	local.info	initialize/gorm.go:56	register table success
+[2022-06-12 13:29:26.792]	local.info	utils/oss.go:50	bucket: douyin-demokey: root/public/VID_20190121_190403.mp4Hash: lq5E_n3cOd8NbkiI2yyYJHy5Ln1NName: null
+[2022-06-12 13:29:26.793]	local.info	utils/oss.go:54	Publish video url: http://rceumi5re.bkt.gdipper.com/root/public/VID_20190121_190403.mp4

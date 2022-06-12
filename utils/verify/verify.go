@@ -56,22 +56,22 @@ func null(str string) (err error) {
 	return nil
 }
 func Resgin(reg request.RegisterRequest) (err error) {
-	if err := Email(reg.Username); err != nil {
-		return err
-	}
-	if err = PassWord(reg.Password); err != nil {
-		return err
-	}
+	//if err := Email(reg.Username); err != nil {
+	//	return err
+	//}
+	//if err = PassWord(reg.Password); err != nil {
+	//	return err
+	//}
 	return nil
 }
 
 func Login(login request.LoginRequest) (err error) {
-	if err := Email(login.Username); err != nil {
-		return err
-	}
-	if err = PassWord(login.Password); err != nil {
-		return err
-	}
+	//if err := Email(login.Username); err != nil {
+	//	return err
+	//}
+	//if err = PassWord(login.Password); err != nil {
+	//	return err
+	//}
 	return nil
 }
 func Comment(commentRequest request.CommentRequest) (err error) {

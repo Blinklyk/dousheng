@@ -25,7 +25,7 @@ func Register(c *gin.Context) {
 
 	//verify
 	if err := verify.Resgin(r); err != nil {
-		c.JSON(http.StatusBadRequest, response.Response{1, err.Error()})
+		c.JSON(http.StatusOK, response.Response{StatusCode: 1, StatusMsg: err.Error()})
 		return
 	}
 
@@ -117,7 +117,6 @@ func UserInfo(c *gin.Context) {
 		c.JSON(http.StatusOK, response.UserInfoResponse{Response: response.Response{StatusCode: 1, StatusMsg: "error: session unmarshal error"}})
 		return
 	}
-
 
 	// call service
 	var checkUserInfoService = service.UserService{}

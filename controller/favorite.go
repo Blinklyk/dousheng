@@ -62,6 +62,7 @@ func GetVideoDTo(video model.Video) response.Video {
 	videoInfo.Title = video.Title
 	return videoInfo
 }
+
 func GetVideoListDTo(video []model.Video) []response.Video {
 	videoInfo := make([]response.Video, len(video))
 	for i := 0; i < len(video); i++ {
