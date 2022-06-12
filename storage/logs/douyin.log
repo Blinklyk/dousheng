@@ -86,3 +86,7 @@
 [2022-06-10 17:37:37.500]	local.info	initialize/gorm.go:56	register table success
 [2022-06-10 17:53:26.667]	local.info	initialize/gorm.go:56	register table success
 
+[2022-06-11 18:49:08.862]	local.info	initialize/gorm.go:56	register table success
+[2022-06-11 18:53:32.754]	local.info	utils/oss.go:50	bucket: douyin-demokey: root/public/bear.mp4Hash: FskLRKlu0IDBpsjOiIikClqqp-fKName: null
+[2022-06-11 18:53:32.756]	local.info	utils/oss.go:54	Publish video url: http://rceumi5re.bkt.gdipper.com/root/public/bear.mp4
+[2022-06-11 19:03:57.399]	local.info	initialize/gorm.go:56	register table success
