@@ -98,13 +98,15 @@ func PublishList(c *gin.Context) {
 	publishVideos, err := ps.PublishList(&publishListRequest)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, Response{StatusCode: 1, StatusMsg: "error in publish service: " + err.Error()})
+		return
 	}
 
+	videosInfo := GetVideoListDTo(publishVideos)
 	// return
 	c.JSON(http.StatusOK, response.PublishListResponse{
 		Response: response.Response{
 			StatusCode: 0,
 		},
-		VideoList: publishVideos,
+		VideoList: videosInfo,
 	})
 }

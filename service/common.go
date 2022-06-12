@@ -3,11 +3,10 @@ package service
 import (
 	"github.com/RaymondCode/simple-demo/global"
 	"github.com/RaymondCode/simple-demo/model"
-	"github.com/RaymondCode/simple-demo/model/response"
 )
 
 // VideoListAppendInfo add is_follow and is_favorite value to a videoList get from db
-func VideoListAppendInfo(vs []response.Video, userID int64) (*[]response.Video, error) {
+func VideoListAppendInfo(vs []model.Video, userID int64) (*[]model.Video, error) {
 	for i := 0; i < len(vs); i++ {
 		// determine is_favorite value
 		var tmp model.Favorite

@@ -90,6 +90,18 @@ func Login(c *gin.Context) {
 	return
 }
 
+func GetUserDTo(user model.User) (userInfo response.UserInfo) {
+	userInfo = response.UserInfo{
+		ID:            user.ID,
+		Name:          user.Name,
+		FollowCount:   user.FollowCount,
+		FollowerCount: user.FollowerCount,
+		IsFollow:      user.IsFollow,
+		Username:      user.Username,
+	}
+	return userInfo
+}
+
 // UserInfo get login userInfo from db
 func UserInfo(c *gin.Context) {
 
@@ -141,17 +153,10 @@ func UserInfo(c *gin.Context) {
 	//	FavoriteVideos: returnUser.FavoriteVideos,
 	//})
 
-	userinfo := response.UserInfo{
-		ID:            returnUser.ID,
-		Name:          returnUser.Name,
-		FollowCount:   returnUser.FollowCount,
-		FollowerCount: returnUser.FollowerCount,
-		IsFollow:      returnUser.IsFollow,
-		Username:      returnUser.Username,
-	}
+	userInfo := GetUserDTo(*returnUser)
 	c.JSON(http.StatusOK, response.UserInfoResponse{
 		Response: response.Response{StatusCode: 0},
-		UserInfo: userinfo,
+		UserInfo: userInfo,
 	})
 	return
 

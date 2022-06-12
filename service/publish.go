@@ -5,7 +5,6 @@ import (
 	"github.com/RaymondCode/simple-demo/global"
 	"github.com/RaymondCode/simple-demo/model"
 	"github.com/RaymondCode/simple-demo/model/request"
-	"github.com/RaymondCode/simple-demo/model/response"
 	"github.com/RaymondCode/simple-demo/utils"
 	"go.uber.org/zap"
 	"strconv"
@@ -42,8 +41,8 @@ func (ps *PublishService) PublishAction(u *model.User, r *request.PublishRequest
 }
 
 // PublishList return the publishing video list
-func (ps *PublishService) PublishList(r *request.PublishListRequest) (publishVideos []response.Video, err error) {
-	if err := global.App.DY_DB.Where("user_id = ?", r.UserID).Preload("User").Order("ID desc").Find(&publishVideos).Error; err != nil {
+func (ps *PublishService) PublishList(r *request.PublishListRequest) (publishVideos []model.Video, err error) {
+	if err := global.App.DY_DB.Model(&model.Video{}).Preload("User").Order("ID desc").Where("user_id = ?", r.UserID).Find(&publishVideos).Error; err != nil {
 		return nil, err
 	}
 	// add is_favorite and is_follow value

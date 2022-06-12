@@ -2,6 +2,7 @@ package controller
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/RaymondCode/simple-demo/model"
 	"github.com/RaymondCode/simple-demo/model/request"
 	"github.com/RaymondCode/simple-demo/model/response"
@@ -49,7 +50,7 @@ func CommentAction(c *gin.Context) {
 		}
 		c.JSON(http.StatusOK, response.CommentActionResponse{
 			Response: response.Response{StatusCode: 0},
-			Comment:  *commentVar,
+			Comment:  GetCommentDTo(*commentVar),
 		})
 		return
 	}
@@ -64,6 +65,33 @@ func CommentAction(c *gin.Context) {
 		return
 	}
 
+}
+
+func GetCommentDTo(comment model.Comment) (commentInfo response.CommentInfo) {
+	commentInfo.ID = comment.ID
+	commentInfo.UserID = comment.UserID
+	commentInfo.User = GetUserDTo(comment.User)
+	commentInfo.VideoID = comment.VideoID
+	commentInfo.Content = comment.Content
+	commentInfo.CreateData = comment.CreateData
+	return
+}
+
+func GetCommentListInfo(commentList *[]model.Comment) []response.CommentInfo {
+	//var commentListInfo [length]response.CommentInfo
+	commentListInfo := make([]response.CommentInfo, len(*commentList))
+	//commentListInfo := make([]response.CommentInfo, 1, length)
+	fmt.Println(*commentList)
+	for index, value := range *commentList {
+		//commentListInfo[index] = GetCommentDTo(value)
+		commentListInfo[index].ID = value.ID
+		commentListInfo[index].UserID = value.UserID
+		commentListInfo[index].User = GetUserDTo(value.User)
+		commentListInfo[index].VideoID = value.VideoID
+		commentListInfo[index].Content = value.Content
+		commentListInfo[index].CreateData = value.CreateData
+	}
+	return commentListInfo
 }
 
 // CommentList get comments list of a video
@@ -97,10 +125,9 @@ func CommentList(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, Response{StatusCode: 1, StatusMsg: "error in commentList: " + err.Error()})
 	}
-
 	// return
 	c.JSON(http.StatusOK, response.CommentListResponse{
 		Response:    response.Response{StatusCode: 0},
-		CommentList: *commentList,
+		CommentList: GetCommentListInfo(commentList),
 	})
 }
