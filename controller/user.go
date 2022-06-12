@@ -2,6 +2,7 @@ package controller
 
 import (
 	"encoding/json"
+	"github.com/RaymondCode/simple-demo/global"
 	"github.com/RaymondCode/simple-demo/model"
 	"github.com/RaymondCode/simple-demo/model/request"
 	"github.com/RaymondCode/simple-demo/model/response"
@@ -9,6 +10,7 @@ import (
 	"github.com/RaymondCode/simple-demo/utils"
 	"github.com/RaymondCode/simple-demo/utils/verify"
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 	"net/http"
 )
 
@@ -54,6 +56,7 @@ func Login(c *gin.Context) {
 	// bind request var
 	var l request.LoginRequest
 	if err := c.ShouldBind(&l); err != nil {
+		global.App.DY_LOG.Error("bind error", zap.Error(err))
 		c.JSON(http.StatusBadRequest, Response{1, "bind error"})
 		return
 	}
@@ -110,15 +113,8 @@ func UserInfo(c *gin.Context) {
 
 	var userInfoVar model.User
 	if err := json.Unmarshal([]byte(UserStr.(string)), &userInfoVar); err != nil {
+		global.App.DY_LOG.Error("session unmarshal error", zap.Error(err))
 		c.JSON(http.StatusOK, response.UserInfoResponse{Response: response.Response{StatusCode: 1, StatusMsg: "error: session unmarshal error"}})
-		return
-	}
-
-	// verify
-	if len(userInfoVar.Name) < 3 {
-		c.JSON(http.StatusOK, response.UserInfoResponse{
-			Response: response.Response{StatusCode: 1, StatusMsg: "userName len less then 3"},
-		})
 		return
 	}
 
@@ -129,29 +125,6 @@ func UserInfo(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, response.Response{StatusCode: 1, StatusMsg: "error: db select"})
 		return
 	}
-	//type UserResp struct {
-	//	response.Response
-	//	// TODO 固定字段改成嵌入结构体
-	//	ID             int64         `json:"id"`
-	//	Name           string        `json:"name,omitempty" gorm:"default:testName"`    // TODO
-	//	FollowCount    int64         `json:"follow_count,omitempty" gorm:"default:0"`   // 关注数
-	//	FollowerCount  int64         `json:"follower_count,omitempty" gorm:"default:0"` // 粉丝数
-	//	IsFollow       bool          `json:"is_follow,omitempty" gorm:"default:false"`  // 当前用户是否关注
-	//	Username       string        `json:"username" gorm:"comment:username" `         // 登录账号
-	//	Videos         []model.Video `json:"videos"`                                    // 发布视频列表
-	//	FavoriteVideos []model.Video `json:"favorite_videos"`                           //`gorm:"many2many:favorite"`
-	//}
-	//c.JSON(http.StatusOK, UserResp{
-	//	Response:       response.Response{StatusCode: 0},
-	//	ID:             returnUser.ID,
-	//	Name:           returnUser.Name,
-	//	FollowCount:    returnUser.FollowCount,
-	//	FollowerCount:  returnUser.FollowerCount,
-	//	IsFollow:       returnUser.IsFollow,
-	//	Username:       returnUser.Username,
-	//	Videos:         returnUser.Videos,
-	//	FavoriteVideos: returnUser.FavoriteVideos,
-	//})
 
 	userInfo := GetUserDTo(*returnUser)
 	c.JSON(http.StatusOK, response.UserInfoResponse{

@@ -81,7 +81,7 @@ func Comment(commentRequest request.CommentRequest) (err error) {
 	if err := oneOrTwo(commentRequest.ActionType); err != nil {
 		return err
 	}
-	if err := null(commentRequest.CommentText); err != nil {
+	if err := null(commentRequest.CommentText); commentRequest.ActionType == "1" && err != nil {
 		return fmt.Errorf("内容不能为空")
 	}
 	return
