@@ -41,7 +41,7 @@ func UploadFile(localPath string) *MyPutRet {
 	// storage space name
 	putPolicy := storage.PutPolicy{
 		Scope:         global.App.DY_CONFIG.Qiniu.Bucket,
-		PersistentOps: "vframe/jpg/offset/1|saveas/" + encodedEntryURI, //取视频第1秒的截图
+		PersistentOps: "vframe/jpg/offset/1|saveas/" + encodedEntryURI, //取视频第1秒的截图,
 		ReturnBody:    `{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}`,
 	}
 	mac := qbox.NewMac(accessKey, secretKey)
