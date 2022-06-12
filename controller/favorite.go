@@ -6,6 +6,7 @@ import (
 	"github.com/RaymondCode/simple-demo/model/request"
 	"github.com/RaymondCode/simple-demo/model/response"
 	"github.com/RaymondCode/simple-demo/service"
+	"github.com/RaymondCode/simple-demo/utils/verify"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -30,6 +31,12 @@ func FavoriteAction(c *gin.Context) {
 		return
 	}
 
+	//verify
+	if err := verify.Favorite(favoriteRequest); err != nil {
+		c.JSON(http.StatusBadRequest, Response{1, "非法数据"})
+		return
+	}
+
 	// call service
 	fs := service.FavoriteService{}
 	err := fs.FavoriteAction(&userInfoVar, &favoriteRequest)
@@ -39,6 +46,28 @@ func FavoriteAction(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, Response{StatusCode: 0})
+}
+
+func GetVideoDTo(video model.Video) response.Video {
+	var videoInfo response.Video
+	videoInfo.ID = video.ID
+	videoInfo.UserID = video.UserID
+	videoInfo.User = GetUserDTo(video.User)
+	videoInfo.PlayUrl = video.PlayUrl
+	videoInfo.CoverUrl = video.CoverUrl
+	videoInfo.FavoriteCount = video.FavoriteCount
+	videoInfo.CommentCount = video.CommentCount
+	videoInfo.IsFavorite = video.IsFavorite
+	videoInfo.PublishTime = video.PublishTime
+	videoInfo.Title = video.Title
+	return videoInfo
+}
+func GetVideoListDTo(video []model.Video) []response.Video {
+	videoInfo := make([]response.Video, len(video))
+	for i := 0; i < len(video); i++ {
+		videoInfo[i] = GetVideoDTo(video[i])
+	}
+	return videoInfo
 }
 
 // FavoriteList get from favorite table
@@ -61,6 +90,12 @@ func FavoriteList(c *gin.Context) {
 		return
 	}
 
+	//verify
+	if err := verify.IsNum(favoriteListRequest.UserID); err != nil {
+		c.JSON(http.StatusBadRequest, Response{1, err.Error()})
+		return
+	}
+
 	// call service
 	fs := service.FavoriteService{}
 	favoriteVideoList, err := fs.FavoriteList(&favoriteListRequest)
@@ -73,6 +108,6 @@ func FavoriteList(c *gin.Context) {
 		Response: response.Response{
 			StatusCode: 0,
 		},
-		VideoList: *favoriteVideoList,
+		VideoList: GetVideoListDTo(*favoriteVideoList),
 	})
 }

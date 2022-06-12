@@ -8,7 +8,7 @@ app:
 redis:
   DB: 0
   Addr: 127.0.0.1:6379
-  Password:
+  Password: 
 
 jwt:
   SigningKey: "secret key"
@@ -34,7 +34,7 @@ mysql:
   config: charset=utf8mb4&parseTime=True&loc=Local
   db-name: dy_database
   username: root
-  password: "12345678"
+  password: 12345678
   max-idle-conns: 10
   max-open-conns: 100
   log-mode: error
@@ -48,6 +48,7 @@ qiniu:
   access-key: "j7dRF1sA0b9y0u4ltGCWUnFRrmCBsP5V6XEOarJ1"
   secret-key: "0RN1xvNRmkZo-zd6GznEccBc_MH9-i1n5tzpBPWw"
   use-cdn-domains: false
+  domain: "http://rceumi5re.bkt.gdipper.com"
 
 
 

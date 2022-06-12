@@ -2,12 +2,15 @@ package controller
 
 import (
 	"encoding/json"
+	"github.com/RaymondCode/simple-demo/global"
 	"github.com/RaymondCode/simple-demo/model"
 	"github.com/RaymondCode/simple-demo/model/request"
 	"github.com/RaymondCode/simple-demo/model/response"
 	"github.com/RaymondCode/simple-demo/service"
 	"github.com/RaymondCode/simple-demo/utils"
+	"github.com/RaymondCode/simple-demo/utils/verify"
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 	"net/http"
 )
 
@@ -17,6 +20,12 @@ func Register(c *gin.Context) {
 	var r request.RegisterRequest
 	if err := c.ShouldBind(&r); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	//verify
+	if err := verify.Resgin(r); err != nil {
+		c.JSON(http.StatusBadRequest, response.Response{1, err.Error()})
 		return
 	}
 
@@ -47,7 +56,14 @@ func Login(c *gin.Context) {
 	// bind request var
 	var l request.LoginRequest
 	if err := c.ShouldBind(&l); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		global.App.DY_LOG.Error("bind error", zap.Error(err))
+		c.JSON(http.StatusBadRequest, Response{1, "bind error"})
+		return
+	}
+
+	//verify
+	if err := verify.Login(l); err != nil {
+		c.JSON(http.StatusBadRequest, Response{1, err.Error()})
 		return
 	}
 
@@ -77,6 +93,18 @@ func Login(c *gin.Context) {
 	return
 }
 
+func GetUserDTo(user model.User) (userInfo response.UserInfo) {
+	userInfo = response.UserInfo{
+		ID:            user.ID,
+		Name:          user.Name,
+		FollowCount:   user.FollowCount,
+		FollowerCount: user.FollowerCount,
+		IsFollow:      user.IsFollow,
+		Username:      user.Username,
+	}
+	return userInfo
+}
+
 // UserInfo get login userInfo from db
 func UserInfo(c *gin.Context) {
 
@@ -85,17 +113,11 @@ func UserInfo(c *gin.Context) {
 
 	var userInfoVar model.User
 	if err := json.Unmarshal([]byte(UserStr.(string)), &userInfoVar); err != nil {
+		global.App.DY_LOG.Error("session unmarshal error", zap.Error(err))
 		c.JSON(http.StatusOK, response.UserInfoResponse{Response: response.Response{StatusCode: 1, StatusMsg: "error: session unmarshal error"}})
 		return
 	}
 
-	// TODO check
-	if len(userInfoVar.Name) < 3 {
-		c.JSON(http.StatusOK, response.UserInfoResponse{
-			Response: response.Response{StatusCode: 1, StatusMsg: "userName len less then 3"},
-		})
-		return
-	}
 
 	// call service
 	var checkUserInfoService = service.UserService{}
@@ -105,9 +127,11 @@ func UserInfo(c *gin.Context) {
 		return
 	}
 
+	userInfo := GetUserDTo(*returnUser)
+
 	c.JSON(http.StatusOK, response.UserInfoResponse{
 		Response: response.Response{StatusCode: 0},
-		UserInfo: *returnUser,
+		UserInfo: userInfo,
 	})
 	return
 

@@ -36,7 +36,6 @@ func (us *UserService) Register(user *model.User) (err error, newUser *model.Use
 func (us *UserService) Login(user *model.User) (returnUser *model.User, tokenStr string, err error) {
 
 	// jwt version
-	// TODO 校验
 	// 查询 账号密码是否正确
 	var u model.User
 
@@ -68,7 +67,6 @@ func (us *UserService) Login(user *model.User) (returnUser *model.User, tokenStr
 	return &u, tokenStr, nil
 
 	//// session + redis version
-	//// TODO check format
 	//var u model.User
 	//if errors.Is(global.DY_DB.Model(&model.User{}).Where("username = ?", user.Username).First(&u).Error, gorm.ErrRecordNotFound) {
 	//	return nil, "", errors.New("user doesn't exist")
@@ -98,12 +96,14 @@ func (us *UserService) GetUserInfo(userID int64, toUserID int64) (returnUser *mo
 		return nil, errors.New("user doesn't exist")
 	}
 	// get user "is_follow" column from follow table
-	if res := global.App.DY_DB.Model(&model.Follow{}).Where("user_id = ? AND follow_id = ?", userID, toUserID).First(&u); res.RowsAffected == 0 {
+
+	if res := global.App.DY_DB.Where("user_id = ? AND follow_id = ?", userID, toUserID).First(&model.Follow{}); res.RowsAffected == 0 {
 		u.IsFollow = false
 	} else {
 		u.IsFollow = true
 	}
 
-	return &u, nil
+	//fmt.Println(u.FollowerCount)
 
+	return &u, nil
 }

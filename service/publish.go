@@ -6,7 +6,7 @@ import (
 	"github.com/RaymondCode/simple-demo/model"
 	"github.com/RaymondCode/simple-demo/model/request"
 	"github.com/RaymondCode/simple-demo/utils"
-	"log"
+	"go.uber.org/zap"
 	"strconv"
 	"time"
 )
@@ -17,11 +17,12 @@ type PublishService struct{}
 func (ps *PublishService) PublishAction(u *model.User, r *request.PublishRequest, filePath string) error {
 	title := r.Title
 
-	// upload the file to oss
-	ret := utils.UploadFile(filePath)
-	// get the url from oss
-	VideoUrl := global.DY_OSS_DOMAIN + ret.Key
-	log.Println("Publish video url: " + VideoUrl)
+	// upload the file to oss and get the url from oss
+	VideoUrl, err := utils.UploadFile(filePath)
+	if err != nil {
+		global.App.DY_LOG.Error("upload video error!", zap.Error(err))
+		return err
+	}
 
 	publishVideo := &model.Video{
 		UserID:        u.ID,
@@ -41,7 +42,7 @@ func (ps *PublishService) PublishAction(u *model.User, r *request.PublishRequest
 
 // PublishList return the publishing video list
 func (ps *PublishService) PublishList(r *request.PublishListRequest) (publishVideos []model.Video, err error) {
-	if err := global.App.DY_DB.Where("user_id = ?", r.UserID).Preload("User").Order("ID desc").Find(&publishVideos).Error; err != nil {
+	if err := global.App.DY_DB.Model(&model.Video{}).Preload("User").Order("ID desc").Where("user_id = ?", r.UserID).Find(&publishVideos).Error; err != nil {
 		return nil, err
 	}
 	// add is_favorite and is_follow value
@@ -50,7 +51,5 @@ func (ps *PublishService) PublishList(r *request.PublishListRequest) (publishVid
 		return nil, errors.New("error: conv userID to int64 ")
 	}
 	VideoListAppendInfo(publishVideos, userIDNum)
-
 	return
-
 }
