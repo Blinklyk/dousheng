@@ -30,7 +30,7 @@ func Register(c *gin.Context) {
 	}
 
 	// call service
-	newUser := &model.User{Username: r.Username, Password: r.Password, FollowCount: 0, FollowerCount: 0}
+	newUser := &model.User{Username: r.Username, Password: r.Password, Name: r.Username, FollowCount: 0, FollowerCount: 0}
 	var userService = service.UserService{}
 	err, userReturn := userService.Register(newUser)
 	if err != nil {
@@ -91,18 +91,6 @@ func Login(c *gin.Context) {
 	})
 
 	return
-}
-
-func GetUserDTo(user model.User) (userInfo response.UserInfo) {
-	userInfo = response.UserInfo{
-		ID:            user.ID,
-		Name:          user.Name,
-		FollowCount:   user.FollowCount,
-		FollowerCount: user.FollowerCount,
-		IsFollow:      user.IsFollow,
-		Username:      user.Username,
-	}
-	return userInfo
 }
 
 // UserInfo get login userInfo from db
@@ -169,4 +157,15 @@ func UserInfo(c *gin.Context) {
 	//})
 	//return
 
+}
+
+func GetUserDTo(user model.User) (userInfo response.UserInfo) {
+	userInfo = response.UserInfo{
+		ID:            user.ID,
+		Name:          user.Name,
+		FollowCount:   user.FollowCount,
+		FollowerCount: user.FollowerCount,
+		IsFollow:      user.IsFollow,
+	}
+	return userInfo
 }

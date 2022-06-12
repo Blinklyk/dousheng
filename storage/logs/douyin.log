@@ -164,3 +164,27 @@
 [2022-06-12 13:55:35.365]	local.info	initialize/gorm.go:58	register table success
 [2022-06-12 13:55:47.424]	local.info	utils/oss.go:68	bucket: douyin-demokey: root/public/1535969099710992384.mp4Hash: FskLRKlu0IDBpsjOiIikClqqp-fKName: null
 [2022-06-12 13:55:47.424]	local.info	utils/oss.go:72	Publish video url: http://rceumi5re.bkt.gdipper.com/root/public/1535969099710992384.mp4
+[2022-06-12 14:32:46.434]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 14:39:03.506]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 14:42:03.155]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 14:50:32.752]	local.info	utils/oss.go:68	bucket: douyin-demokey: root/public/1535982882089078784.mp4Hash: FkSvm_OJO1ypHGWIWC7haa2aN6BZName: null
+[2022-06-12 14:50:32.753]	local.info	utils/oss.go:72	Publish video url: http://rceumi5re.bkt.gdipper.com/root/public/1535982882089078784.mp4
+[2022-06-12 15:10:52.896]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 15:12:11.292]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 15:13:51.167]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 15:14:19.537]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 15:15:28.706]	local.info	utils/oss.go:68	bucket: douyin-demokey: root/public/1535989138111598592.mp4Hash: lvwJOqyfLsXnQJZepUueIkN0WhShName: null
+[2022-06-12 15:15:28.708]	local.info	utils/oss.go:72	Publish video url: http://rceumi5re.bkt.gdipper.com/root/public/1535989138111598592.mp4
+[2022-06-12 15:24:26.243]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 15:27:10.787]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 15:38:08.742]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 15:41:26.578]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 15:42:30.427]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 15:43:08.525]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 15:46:57.704]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 15:55:48.768]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 15:56:38.987]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 15:57:00.613]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 15:59:20.980]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 16:06:16.130]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 16:16:56.506]	local.info	initialize/gorm.go:58	register table success

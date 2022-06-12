@@ -5,8 +5,8 @@ import (
 	"github.com/RaymondCode/simple-demo/model/response"
 	"github.com/RaymondCode/simple-demo/service"
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
-	"time"
 )
 
 // Feed token is optional here
@@ -17,10 +17,13 @@ func Feed(c *gin.Context) {
 	if err := c.ShouldBind(&feedRequest); err != nil {
 		c.JSON(http.StatusBadRequest, Response{StatusCode: 1, StatusMsg: "feed bind error"})
 	}
+	log.Printf("feedRequest%v\n", feedRequest)
+	latestTime := c.Query("latest_time")
+	log.Println("latest_time: ", latestTime)
 
 	// call service
 	fs := service.FeedService{}
-	token := feedRequest.Token
+	token := c.Query("token")
 	// if request doesn't contain token
 	if token == "" {
 		feedList, err := fs.FeedWithoutToken()
@@ -29,10 +32,11 @@ func Feed(c *gin.Context) {
 			return
 		}
 		videoInfo := GetVideoListDTo(*feedList)
+		log.Println(" withToken nextTime:", videoInfo[len(videoInfo)-1].PublishTime.Unix(), "   ", videoInfo[len(videoInfo)-1].PublishTime)
 		c.JSON(http.StatusOK, response.FeedResponse{
 			Response:  response.Response{StatusCode: 0},
 			VideoList: videoInfo,
-			NextTime:  time.Now().Unix(),
+			NextTime:  videoInfo[len(videoInfo)-1].PublishTime.Unix(),
 		})
 		return
 	}
@@ -45,12 +49,11 @@ func Feed(c *gin.Context) {
 			return
 		}
 		videoInfo := GetVideoListDTo(*feedList)
+		log.Println(" withToken nextTime:", videoInfo[len(videoInfo)-1].PublishTime.Unix(), videoInfo[len(videoInfo)-1].PublishTime)
 		c.JSON(http.StatusOK, response.FeedResponse{
 			Response:  response.Response{StatusCode: 0},
 			VideoList: videoInfo,
-			NextTime:  time.Now().Unix(),
+			NextTime:  videoInfo[len(videoInfo)-1].PublishTime.Unix(),
 		})
-		return
 	}
-
 }

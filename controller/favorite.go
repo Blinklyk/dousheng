@@ -48,8 +48,8 @@ func FavoriteAction(c *gin.Context) {
 	c.JSON(http.StatusOK, Response{StatusCode: 0})
 }
 
-func GetVideoDTo(video model.Video) response.Video {
-	var videoInfo response.Video
+func GetVideoDTo(video model.Video) response.VideoDTO {
+	var videoInfo response.VideoDTO
 	videoInfo.ID = video.ID
 	videoInfo.UserID = video.UserID
 	videoInfo.User = GetUserDTo(video.User)
@@ -63,8 +63,8 @@ func GetVideoDTo(video model.Video) response.Video {
 	return videoInfo
 }
 
-func GetVideoListDTo(video []model.Video) []response.Video {
-	videoInfo := make([]response.Video, len(video))
+func GetVideoListDTo(video []model.Video) []response.VideoDTO {
+	videoInfo := make([]response.VideoDTO, len(video))
 	for i := 0; i < len(video); i++ {
 		videoInfo[i] = GetVideoDTo(video[i])
 	}
