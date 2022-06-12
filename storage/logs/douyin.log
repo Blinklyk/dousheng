@@ -69,7 +69,6 @@
 [2022-06-12 00:38:06.628]	local.info	initialize/gorm.go:56	register table success
 [2022-06-12 00:46:57.700]	local.info	initialize/gorm.go:56	register table success
 [2022-06-12 00:46:59.311]	local.error	service/user.go:103	error information
-
 [2022-06-10 16:54:35.842]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
 [2022-06-10 16:55:43.447]	local.info	initialize/gorm.go:56	register table success
 [2022-06-10 17:02:24.455]	local.info	initialize/gorm.go:56	register table success
@@ -86,4 +85,4 @@
 [2022-06-10 17:37:37.500]	local.info	initialize/gorm.go:56	register table success
 [2022-06-10 17:53:26.667]	local.info	initialize/gorm.go:56	register table success
 
-[2022-06-12 19:48:00.660]	local.info	initialize/gorm.go:56	register table success
+

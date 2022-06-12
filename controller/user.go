@@ -117,7 +117,6 @@ func UserInfo(c *gin.Context) {
 		c.JSON(http.StatusOK, response.UserInfoResponse{Response: response.Response{StatusCode: 1, StatusMsg: "error: session unmarshal error"}})
 		return
 	}
-
 	// call service
 	var checkUserInfoService = service.UserService{}
 	returnUser, err := checkUserInfoService.GetUserInfo(userInfoVar.ID, userInfoVar.ID)
@@ -127,6 +126,7 @@ func UserInfo(c *gin.Context) {
 	}
 
 	userInfo := GetUserDTo(*returnUser)
+
 	c.JSON(http.StatusOK, response.UserInfoResponse{
 		Response: response.Response{StatusCode: 0},
 		UserInfo: userInfo,
