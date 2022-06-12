@@ -83,7 +83,6 @@ func (cs *CommentService) CommentList(u model.User, r *request.CommentListReques
 	if err := global.App.DY_DB.Model(&model.Comment{}).Where("video_id = ?", videoID).Preload("User").Find(&commentList).Error; err != nil {
 		return nil, errors.New("get comment list when db select error")
 	}
-
 	// add is_follow value to the comment list
 	for i := 0; i < len(commentList); i++ {
 		var temp model.Follow
@@ -91,5 +90,6 @@ func (cs *CommentService) CommentList(u model.User, r *request.CommentListReques
 			commentList[i].User.IsFollow = true
 		}
 	}
+
 	return &commentList, nil
 }

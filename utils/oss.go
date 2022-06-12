@@ -2,14 +2,18 @@ package utils
 
 import (
 	"context"
+<<<<<<< HEAD
 	"encoding/base64"
 	"fmt"
 	"path/filepath"
 	"strings"
 
+=======
+>>>>>>> a5ad9421cddcb4c71a3ebda7d6ed77f835c4b828
 	"github.com/RaymondCode/simple-demo/global"
 	"github.com/qiniu/go-sdk/v7/auth/qbox"
 	"github.com/qiniu/go-sdk/v7/storage"
+	"go.uber.org/zap"
 )
 
 type MyPutRet struct {
@@ -20,7 +24,7 @@ type MyPutRet struct {
 	Name   string
 }
 
-func UploadFile(localPath string) *MyPutRet {
+func UploadFile(localPath string) (string, error) {
 	// get from platform
 
 	accessKey := global.App.DY_CONFIG.Qiniu.AccessKey
@@ -60,11 +64,15 @@ func UploadFile(localPath string) *MyPutRet {
 	ret := MyPutRet{}
 	err := formUploader.PutFile(context.Background(), &ret, upToken, key, localFile, nil)
 	if err != nil {
-		fmt.Println(err)
-		return nil
+		global.App.DY_LOG.Error("put file error ", zap.Error(err))
+		return "", err
 	}
-	fmt.Println("bucket: "+ret.Bucket, "key: "+ret.Key, ret.Fsize, "Hash: "+ret.Hash, "Name: "+ret.Name)
-	return &ret
+	global.App.DY_LOG.Info("bucket: " + ret.Bucket + "key: " + ret.Key + "Hash: " + ret.Hash + "Name: " + ret.Name)
+
+	// get url: oss domain + ret.key
+	VideoUrl := global.App.DY_CONFIG.Qiniu.Domain + "/" + ret.Key
+	global.App.DY_LOG.Info("Publish video url: " + VideoUrl)
+	return VideoUrl, nil
 }
 
 func qiniuConfig() *storage.Config {
