@@ -69,38 +69,6 @@
 [2022-06-12 00:38:06.628]	local.info	initialize/gorm.go:56	register table success
 [2022-06-12 00:46:57.700]	local.info	initialize/gorm.go:56	register table success
 [2022-06-12 00:46:59.311]	local.error	service/user.go:103	error information
-
-[2022-06-12 10:52:31.233]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 11:06:27.942]	local.info	utils/oss.go:50	bucket: douyin-demokey: root/public\bear.mp4Hash: FskLRKlu0IDBpsjOiIikClqqp-fKName: null
-[2022-06-12 11:06:27.947]	local.info	utils/oss.go:54	Publish video url: http://rceumi5re.bkt.gdipper.comroot/public\bear.mp4
-[2022-06-12 11:15:57.996]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 11:18:39.584]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 11:20:53.312]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 12:56:27.162]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 14:06:14.514]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 14:23:42.158]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 14:37:46.856]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 14:42:04.995]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 15:18:18.795]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 15:22:17.675]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 15:26:20.491]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 15:45:45.966]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 15:46:49.501]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 15:52:00.657]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 15:53:13.121]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 15:55:06.815]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 15:58:10.690]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 16:08:43.807]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 16:10:52.173]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 16:21:50.576]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 16:40:08.505]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 16:40:19.072]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 16:43:15.635]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 16:43:55.757]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 16:46:10.649]	local.info	initialize/gorm.go:56	register table success
-[2022-06-12 16:48:05.186]	local.info	initialize/gorm.go:56	register table success
-
-
 [2022-06-10 16:54:35.842]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
 [2022-06-10 16:55:43.447]	local.info	initialize/gorm.go:56	register table success
 [2022-06-10 17:02:24.455]	local.info	initialize/gorm.go:56	register table success
@@ -116,4 +84,5 @@
 [2022-06-10 17:33:38.937]	local.info	initialize/gorm.go:56	register table success
 [2022-06-10 17:37:37.500]	local.info	initialize/gorm.go:56	register table success
 [2022-06-10 17:53:26.667]	local.info	initialize/gorm.go:56	register table success
+
 
