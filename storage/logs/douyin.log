@@ -1,5 +1,9 @@
 [2022-06-08 17:01:36.128]	local.info	initialize/init.go:15	log init success!
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/gzh
 [2022-06-09 20:26:12.480]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
 [2022-06-09 20:37:56.884]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
 [2022-06-09 20:40:16.200]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
@@ -48,7 +52,11 @@
 [2022-06-11 12:37:20.070]	local.info	initialize/gorm.go:57	register table success
 [2022-06-11 12:40:08.400]	local.info	initialize/gorm.go:57	register table success
 [2022-06-11 12:40:23.814]	local.info	initialize/gorm.go:57	register table success
+<<<<<<< HEAD
 =======
+=======
+
+>>>>>>> upstream/gzh
 
 [2022-06-09 10:29:48.051]	local.info	initialize/gorm.go:56	register table success
 [2022-06-09 10:59:18.967]	local.info	initialize/gorm.go:56	register table success
@@ -135,5 +143,8 @@
 [2022-06-10 17:37:37.500]	local.info	initialize/gorm.go:56	register table success
 [2022-06-10 17:53:26.667]	local.info	initialize/gorm.go:56	register table success
 
+<<<<<<< HEAD
 
 >>>>>>> a5ad9421cddcb4c71a3ebda7d6ed77f835c4b828
+=======
+>>>>>>> upstream/gzh

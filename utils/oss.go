@@ -3,13 +3,20 @@ package utils
 import (
 	"context"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/gzh
 	"encoding/base64"
 	"fmt"
 	"path/filepath"
 	"strings"
 
+<<<<<<< HEAD
 =======
 >>>>>>> a5ad9421cddcb4c71a3ebda7d6ed77f835c4b828
+=======
+>>>>>>> upstream/gzh
 	"github.com/RaymondCode/simple-demo/global"
 	"github.com/qiniu/go-sdk/v7/auth/qbox"
 	"github.com/qiniu/go-sdk/v7/storage"

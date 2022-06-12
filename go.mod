@@ -13,6 +13,7 @@ require (
 	github.com/qiniu/go-sdk/v7 v7.13.0
 	go.uber.org/zap v1.21.0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e
 	gorm.io/driver/mysql v1.3.4
 =======
@@ -20,6 +21,14 @@ require (
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 	gorm.io/driver/mysql v1.3.3
 >>>>>>> a5ad9421cddcb4c71a3ebda7d6ed77f835c4b828
+=======
+	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e
+	gorm.io/driver/mysql v1.3.4
+	golang.org/x/crypto v0.0.0-20220427172511-eb4f295cb31f
+	gopkg.in/natefinch/lumberjack.v2 v2.0.0
+	gorm.io/driver/mysql v1.3.3
+
+>>>>>>> upstream/gzh
 	gorm.io/gorm v1.23.5
 )
 
@@ -63,11 +72,17 @@ require (
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gopkg.in/ini.v1 v1.66.6 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 =======
 	gopkg.in/ini.v1 v1.66.4 // indirect
 >>>>>>> a5ad9421cddcb4c71a3ebda7d6ed77f835c4b828
+=======
+	gopkg.in/ini.v1 v1.66.6 // indirect
+	gopkg.in/natefinch/lumberjack.v2 v2.0.0
+	gopkg.in/ini.v1 v1.66.4 // indirect
+>>>>>>> upstream/gzh
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
