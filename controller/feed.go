@@ -28,9 +28,10 @@ func Feed(c *gin.Context) {
 			c.JSON(http.StatusInternalServerError, Response{StatusCode: 1, StatusMsg: "error:feed without token" + err.Error()})
 			return
 		}
+		videoInfo := GetVideoListDTo(*feedList)
 		c.JSON(http.StatusOK, response.FeedResponse{
 			Response:  response.Response{StatusCode: 0},
-			VideoList: *feedList,
+			VideoList: videoInfo,
 			NextTime:  time.Now().Unix(),
 		})
 		return
@@ -43,9 +44,10 @@ func Feed(c *gin.Context) {
 			c.JSON(http.StatusInternalServerError, Response{StatusCode: 1, StatusMsg: "error:feed with token" + err.Error()})
 			return
 		}
+		videoInfo := GetVideoListDTo(*feedList)
 		c.JSON(http.StatusOK, response.FeedResponse{
 			Response:  response.Response{StatusCode: 0},
-			VideoList: *feedList,
+			VideoList: videoInfo,
 			NextTime:  time.Now().Unix(),
 		})
 		return
