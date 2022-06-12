@@ -26,6 +26,7 @@ func RelationAction(c *gin.Context) {
 	}
 
 	var relationActionRequest request.RelationActionRequest
+
 	if err := c.ShouldBind(&relationActionRequest); err != nil {
 		c.JSON(http.StatusBadRequest, Response{StatusCode: 1, StatusMsg: "bind error"})
 		return
