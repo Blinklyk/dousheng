@@ -1,4 +1,62 @@
 [2022-06-08 17:01:36.128]	local.info	initialize/init.go:15	log init success!
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/gzh
+[2022-06-09 20:26:12.480]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 20:37:56.884]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 20:40:16.200]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 20:51:09.532]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 20:57:07.980]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 21:03:01.085]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 22:12:33.342]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 22:20:43.579]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 22:22:04.162]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 22:27:20.999]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 22:30:50.629]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 22:31:03.701]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 22:39:24.614]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 22:39:43.291]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 22:39:51.769]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 22:40:39.916]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 22:41:24.721]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 22:41:35.816]	local.error	initialize/gorm.go:32	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 22:43:43.181]	local.error	initialize/gorm.go:33	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-09 23:39:14.227]	local.error	initialize/gorm.go:33	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-10 10:18:58.322]	local.error	initialize/gorm.go:33	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-10 10:19:36.900]	local.error	initialize/gorm.go:33	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-10 10:22:23.636]	local.error	initialize/gorm.go:33	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-10 10:22:52.139]	local.error	initialize/gorm.go:33	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-10 10:23:07.483]	local.error	initialize/gorm.go:33	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-10 10:23:43.048]	local.error	initialize/gorm.go:33	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-10 10:34:38.561]	local.error	initialize/gorm.go:33	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-10 10:34:42.064]	local.error	initialize/gorm.go:33	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-10 10:37:11.248]	local.error	initialize/gorm.go:33	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-10 10:40:02.876]	local.error	initialize/gorm.go:33	Error 1045: Access denied for user 'root'@'localhost' (using password: YES)
+[2022-06-10 10:51:47.812]	local.error	initialize/gorm.go:33	Error 1049: Unknown database 'dy_database'
+[2022-06-10 10:52:06.174]	local.info	initialize/gorm.go:57	register table success
+[2022-06-10 11:17:45.802]	local.info	initialize/gorm.go:57	register table success
+[2022-06-11 10:17:08.023]	local.info	initialize/gorm.go:57	register table success
+[2022-06-11 10:25:37.311]	local.info	initialize/gorm.go:57	register table success
+[2022-06-11 10:34:19.432]	local.info	initialize/gorm.go:57	register table success
+[2022-06-11 10:41:19.686]	local.info	initialize/gorm.go:57	register table success
+[2022-06-11 10:44:40.302]	local.info	initialize/gorm.go:57	register table success
+[2022-06-11 10:46:38.908]	local.info	initialize/gorm.go:57	register table success
+[2022-06-11 10:47:50.573]	local.info	controller/publish.go:19	======================
+[2022-06-11 10:49:11.004]	local.info	controller/publish.go:19	======================
+[2022-06-11 10:50:10.604]	local.info	initialize/gorm.go:57	register table success
+[2022-06-11 11:03:57.502]	local.info	initialize/gorm.go:57	register table success
+[2022-06-11 11:04:40.340]	local.info	initialize/gorm.go:57	register table success
+[2022-06-11 11:44:26.685]	local.info	initialize/gorm.go:57	register table success
+[2022-06-11 12:37:20.070]	local.info	initialize/gorm.go:57	register table success
+[2022-06-11 12:40:08.400]	local.info	initialize/gorm.go:57	register table success
+[2022-06-11 12:40:23.814]	local.info	initialize/gorm.go:57	register table success
+<<<<<<< HEAD
+=======
+=======
+
+>>>>>>> upstream/gzh
 
 [2022-06-09 10:29:48.051]	local.info	initialize/gorm.go:56	register table success
 [2022-06-09 10:59:18.967]	local.info	initialize/gorm.go:56	register table success
@@ -85,4 +143,8 @@
 [2022-06-10 17:37:37.500]	local.info	initialize/gorm.go:56	register table success
 [2022-06-10 17:53:26.667]	local.info	initialize/gorm.go:56	register table success
 
+<<<<<<< HEAD
 
+>>>>>>> a5ad9421cddcb4c71a3ebda7d6ed77f835c4b828
+=======
+>>>>>>> upstream/gzh

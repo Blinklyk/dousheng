@@ -2,21 +2,22 @@ package controller
 
 import (
 	"encoding/json"
+	"log"
+	"net/http"
+	"strconv"
+
 	"github.com/RaymondCode/simple-demo/model"
 	"github.com/RaymondCode/simple-demo/model/request"
 	"github.com/RaymondCode/simple-demo/model/response"
 	"github.com/RaymondCode/simple-demo/service"
 	"github.com/RaymondCode/simple-demo/utils/verify"
 	"github.com/gin-gonic/gin"
-	"log"
-	"net/http"
-	"strconv"
 )
 
 // RelationAction actionType = 1: follow; actionType = 2: cancel follow
 func RelationAction(c *gin.Context) {
 	UserStr, _ := c.Get("UserStr")
-	log.Println("UserStr: ", UserStr)
+	log.Println("11 UserStr: ", UserStr)
 
 	var userInfoVar model.User
 	if err := json.Unmarshal([]byte(UserStr.(string)), &userInfoVar); err != nil {
