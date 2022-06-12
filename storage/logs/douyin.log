@@ -158,3 +158,9 @@
 [2022-06-12 13:29:26.792]	local.info	utils/oss.go:50	bucket: douyin-demokey: root/public/VID_20190121_190403.mp4Hash: lq5E_n3cOd8NbkiI2yyYJHy5Ln1NName: null
 [2022-06-12 13:29:26.793]	local.info	utils/oss.go:54	Publish video url: http://rceumi5re.bkt.gdipper.com/root/public/VID_20190121_190403.mp4
 
+[2022-06-12 13:39:03.487]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 13:39:33.090]	local.info	utils/oss.go:67	bucket: douyin-demokey: root/public/1535965016686071808.mp4Hash: FskLRKlu0IDBpsjOiIikClqqp-fKName: null
+[2022-06-12 13:39:33.091]	local.info	utils/oss.go:71	Publish video url: http://rceumi5re.bkt.gdipper.com/root/public/1535965016686071808.mp4
+[2022-06-12 13:55:35.365]	local.info	initialize/gorm.go:58	register table success
+[2022-06-12 13:55:47.424]	local.info	utils/oss.go:68	bucket: douyin-demokey: root/public/1535969099710992384.mp4Hash: FskLRKlu0IDBpsjOiIikClqqp-fKName: null
+[2022-06-12 13:55:47.424]	local.info	utils/oss.go:72	Publish video url: http://rceumi5re.bkt.gdipper.com/root/public/1535969099710992384.mp4

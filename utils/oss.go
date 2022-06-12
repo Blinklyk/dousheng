@@ -2,21 +2,11 @@ package utils
 
 import (
 	"context"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> upstream/gzh
 	"encoding/base64"
-	"fmt"
 	"path/filepath"
 	"strings"
 
-<<<<<<< HEAD
-=======
->>>>>>> a5ad9421cddcb4c71a3ebda7d6ed77f835c4b828
-=======
->>>>>>> upstream/gzh
 	"github.com/RaymondCode/simple-demo/global"
 	"github.com/qiniu/go-sdk/v7/auth/qbox"
 	"github.com/qiniu/go-sdk/v7/storage"
@@ -31,7 +21,7 @@ type MyPutRet struct {
 	Name   string
 }
 
-func UploadFile(localPath string) (string, error) {
+func UploadFile(localPath string) (string, string, error) {
 	// get from platform
 
 	accessKey := global.App.DY_CONFIG.Qiniu.AccessKey
@@ -45,7 +35,8 @@ func UploadFile(localPath string) (string, error) {
 	prevfix := filename[0 : indexOfDot-1]
 	coverName := prevfix + "." + "jpg"
 
-	photoKey := "root/cover" + coverName //封面的访问路径，我们通过此路径在七牛云空间中定位封面
+	photoKey := "root/cover/" + coverName //封面的访问路径，我们通过此路径在七牛云空间中定位封面
+	coverUrl := global.App.DY_CONFIG.Qiniu.Domain + "/" + photoKey
 	entry := global.App.DY_CONFIG.Qiniu.Bucket + ":" + photoKey
 	encodedEntryURI := base64.StdEncoding.EncodeToString([]byte(entry))
 
@@ -72,14 +63,14 @@ func UploadFile(localPath string) (string, error) {
 	err := formUploader.PutFile(context.Background(), &ret, upToken, key, localFile, nil)
 	if err != nil {
 		global.App.DY_LOG.Error("put file error ", zap.Error(err))
-		return "", err
+		return "", "", err
 	}
 	global.App.DY_LOG.Info("bucket: " + ret.Bucket + "key: " + ret.Key + "Hash: " + ret.Hash + "Name: " + ret.Name)
 
 	// get url: oss domain + ret.key
 	VideoUrl := global.App.DY_CONFIG.Qiniu.Domain + "/" + ret.Key
 	global.App.DY_LOG.Info("Publish video url: " + VideoUrl)
-	return VideoUrl, nil
+	return VideoUrl, coverUrl, nil
 }
 
 func qiniuConfig() *storage.Config {

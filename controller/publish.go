@@ -18,20 +18,8 @@ import (
 	"github.com/RaymondCode/simple-demo/service"
 	"github.com/RaymondCode/simple-demo/utils/verify"
 	"github.com/gin-gonic/gin"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-	"go.uber.org/zap"
-	"net/http"
-	"path/filepath"
->>>>>>> a5ad9421cddcb4c71a3ebda7d6ed77f835c4b828
-=======
 
 	"go.uber.org/zap"
-	"net/http"
-	"path/filepath"
-
->>>>>>> upstream/gzh
 )
 
 // Publish check token then save upload file to public directory

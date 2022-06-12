@@ -2,7 +2,6 @@ package service
 
 import (
 	"errors"
-	"log"
 	"strconv"
 	"time"
 
@@ -10,20 +9,8 @@ import (
 	"github.com/RaymondCode/simple-demo/model"
 	"github.com/RaymondCode/simple-demo/model/request"
 	"github.com/RaymondCode/simple-demo/utils"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-	"go.uber.org/zap"
-	"strconv"
-	"time"
->>>>>>> a5ad9421cddcb4c71a3ebda7d6ed77f835c4b828
-=======
 
 	"go.uber.org/zap"
-	"strconv"
-	"time"
-
->>>>>>> upstream/gzh
 )
 
 type PublishService struct{}
@@ -33,7 +20,7 @@ func (ps *PublishService) PublishAction(u *model.User, r *request.PublishRequest
 	title := r.Title
 
 	// upload the file to oss and get the url from oss
-	VideoUrl, err := utils.UploadFile(filePath)
+	videoUrl, coverUrl, err := utils.UploadFile(filePath)
 	if err != nil {
 		global.App.DY_LOG.Error("upload video error!", zap.Error(err))
 		return err
@@ -41,7 +28,8 @@ func (ps *PublishService) PublishAction(u *model.User, r *request.PublishRequest
 
 	publishVideo := &model.Video{
 		UserID:        u.ID,
-		PlayUrl:       VideoUrl,
+		PlayUrl:       videoUrl,
+		CoverUrl:      coverUrl,
 		FavoriteCount: 0,
 		CommentCount:  0,
 		PublishTime:   time.Now(),

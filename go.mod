@@ -4,35 +4,22 @@ go 1.17
 
 require (
 	github.com/appleboy/gin-jwt/v2 v2.8.0
-	github.com/dlclark/regexp2 v1.4.0
 	github.com/fsnotify/fsnotify v1.5.4
 	github.com/gin-contrib/sessions v0.0.5
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/golang-jwt/jwt/v4 v4.4.1
-	github.com/qiniu/go-sdk/v7 v7.13.0
 	go.uber.org/zap v1.21.0
-<<<<<<< HEAD
-<<<<<<< HEAD
 	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e
-	gorm.io/driver/mysql v1.3.4
-=======
-	golang.org/x/crypto v0.0.0-20220427172511-eb4f295cb31f
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
-	gorm.io/driver/mysql v1.3.3
->>>>>>> a5ad9421cddcb4c71a3ebda7d6ed77f835c4b828
-=======
-	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e
 	gorm.io/driver/mysql v1.3.4
-	golang.org/x/crypto v0.0.0-20220427172511-eb4f295cb31f
-	gopkg.in/natefinch/lumberjack.v2 v2.0.0
-	gorm.io/driver/mysql v1.3.3
-
->>>>>>> upstream/gzh
 	gorm.io/gorm v1.23.5
 )
 
-require github.com/bwmarrin/snowflake v0.3.0 // indirect
+require (
+	github.com/bwmarrin/snowflake v0.3.0
+	github.com/goccy/go-json v0.9.7 // indirect
+)
 
 require (
 	github.com/boj/redistore v0.0.0-20180917114910-cd5dcc76aeff // indirect
@@ -42,7 +29,6 @@ require (
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
-	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/gomodule/redigo v2.0.0+incompatible // indirect
 	github.com/gorilla/context v1.1.1 // indirect
 	github.com/gorilla/securecookie v1.1.1 // indirect
@@ -59,6 +45,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.2 // indirect
+	github.com/qiniu/go-sdk/v7 v7.13.0 // indirect
 	github.com/spf13/afero v1.8.2 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
@@ -67,22 +54,11 @@ require (
 	github.com/ugorji/go/codec v1.2.7 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
-	golang.org/x/sync v0.0.0-20220601150217-0de741cfad7f // indirect
+	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
 	golang.org/x/sys v0.0.0-20220608164250-635b8c9b7f68 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
-<<<<<<< HEAD
-<<<<<<< HEAD
 	gopkg.in/ini.v1 v1.66.6 // indirect
-	gopkg.in/natefinch/lumberjack.v2 v2.0.0
-=======
-	gopkg.in/ini.v1 v1.66.4 // indirect
->>>>>>> a5ad9421cddcb4c71a3ebda7d6ed77f835c4b828
-=======
-	gopkg.in/ini.v1 v1.66.6 // indirect
-	gopkg.in/natefinch/lumberjack.v2 v2.0.0
-	gopkg.in/ini.v1 v1.66.4 // indirect
->>>>>>> upstream/gzh
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
