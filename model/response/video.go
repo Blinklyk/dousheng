@@ -2,16 +2,12 @@ package response
 
 import (
 	"github.com/RaymondCode/simple-demo/model"
-	"gorm.io/gorm"
 	"time"
 )
 
 type Video struct {
 	// TODO 改成嵌入结构体
-	ID            int64           `gorm:"primarykey"` // 主键ID
-	CreatedAt     time.Time       // 创建时间
-	UpdatedAt     time.Time       // 更新时间
-	DeletedAt     gorm.DeletedAt  `gorm:"index" json:"-"`                              // 删除时间
+	ID            int64           `gorm:"primarykey"`                                  // 主键ID
 	UserID        int64           `json:"author_id,omitempty"`                         // 发布作者
 	User          UserInfo        `json:"user,omitempty" gorm:"foreignKey:UserID"`     // user信息
 	PlayUrl       string          `json:"play_url,omitempty" gorm:"default:testName"`  // 视频地址

@@ -5,7 +5,6 @@ import (
 	"github.com/RaymondCode/simple-demo/global"
 	"github.com/RaymondCode/simple-demo/model"
 	"github.com/RaymondCode/simple-demo/model/request"
-	"github.com/RaymondCode/simple-demo/model/response"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 	"log"
@@ -108,7 +107,7 @@ func (fs *FavoriteService) FavoriteAction(u *model.User, r *request.FavoriteRequ
 }
 
 // FavoriteList get the videos that user favorites
-func (fs *FavoriteService) FavoriteList(r *request.FavoriteListRequest) (favoriteVideoList *[]response.Video, err error) {
+func (fs *FavoriteService) FavoriteList(r *request.FavoriteListRequest) (favoriteVideoList *[]model.Video, err error) {
 	userID := r.UserID
 	// find favorite videos from db
 	var videosID []int64

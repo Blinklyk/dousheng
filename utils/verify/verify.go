@@ -49,6 +49,12 @@ func PassWord(Password string) (err error) {
 	}
 	return nil
 }
+func null(str string) (err error) {
+	if reault, _ := regexp.MatchString(`^\s*$`, str); reault {
+		return fmt.Errorf("内容不能为空")
+	}
+	return nil
+}
 func Resgin(reg request.RegisterRequest) (err error) {
 	if err := Email(reg.Username); err != nil {
 		return err
@@ -74,6 +80,9 @@ func Comment(commentRequest request.CommentRequest) (err error) {
 	}
 	if err := oneOrTwo(commentRequest.ActionType); err != nil {
 		return err
+	}
+	if err := null(commentRequest.CommentText); err != nil {
+		return fmt.Errorf("内容不能为空")
 	}
 	return
 }
