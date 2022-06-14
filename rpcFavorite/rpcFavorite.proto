@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package rpcVideo;
+
+option go_package = "github.com/RaymondCode/simple-demo/pb/rpcVideo/rpcFavorite;rpcFavorite";
+
+import "rpcVideo/rpcVideo.proto";
+
+message Favorite {
+  int64 id = 1;
+  int64 user_id = 2;
+  int64 video_id = 3;
+}
+
+message FavoriteRequest {
+  string token = 1;
+  string video_id = 2;
+  string action_type = 3;
+  int64 user_id = 4;
+}
+
+message FavoriteResponse {
+  int32 status_code = 1;
+  string status_msg = 2;
+}
+
+message FavoriteListRequest {
+  int64 user_id = 1;
+  string token = 2;
+}
+
+message FavoriteListResponse {
+  int32 status_code = 1;
+  string status_msg = 2;
+  repeated rpcVideo.Video video_list = 3;
+}
+
+service RPCFavoriteService {
+  rpc FavoriteAction(FavoriteRequest) returns (FavoriteResponse) {}
+  rpc FavoriteList(FavoriteListRequest) returns (FavoriteListResponse) {}
+}
+

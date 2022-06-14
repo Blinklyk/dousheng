@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package rpcUser;
+
+option go_package = "github.com/RaymondCode/simple-demo/pb/rpcUser;rpcUser";
+
+message User {
+  int64 id = 1;
+  string name = 2;
+  int64 follow_count = 3;
+  int64 follower_count = 4;
+  bool is_follow = 5;
+  string username = 6;
+  string password = 7;
+}
+
+message RegisterRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message RegisterResponse {
+  int64 user_id = 1;
+  string token = 2;
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  int64 user_id = 1;
+  string token = 2;
+}
+
+message UserInfoRequest {
+  int64 user_id = 1;
+  string token = 2;
+}
+
+message UserInfoResponse {
+  User user = 1;
+}
+
+
+
+
+service RPCUserService {
+  rpc Register(RegisterRequest) returns (RegisterResponse) {}
+  rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc GetUserInfo(UserInfoRequest) returns (UserInfoResponse) {}
+}

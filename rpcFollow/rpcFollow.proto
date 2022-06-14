@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package rpcFollow;
+
+option go_package = "github.com/RaymondCode/simple-demo/pb/rpcFollow;rpcFollow";
+
+import "rpcUser/rpcUser.proto";
+
+message Follow {
+  int64 id = 1;
+  int64 user_id = 2;
+  int64 follow_id = 3;
+  bool status = 4;
+}
+
+message Follower {
+  int64 id = 1;
+  int64 user_id = 2;
+  int64 follower_id = 3;
+  bool status = 4;
+}
+
+message FollowActionReq {
+  string token = 1;
+  string to_user_id = 2;
+  string action_type = 3;
+  int64 user_id = 4;
+}
+
+message FollowActionResp {
+  int32 status_code = 1;
+  string status_msg = 2;
+}
+
+message FollowListReq {
+  string user_id = 1;
+  string token = 2;
+}
+
+message FollowListResp {
+  int32 status_code = 1;
+  string status_msg = 2;
+  repeated rpcUser.User user_list = 3;
+}
+
+message FollowerListReq {
+  string user_id = 1;
+  string token = 2;
+}
+
+message FollowerListResp {
+  int32 status_code = 1;
+  string status_msg = 2;
+  repeated rpcUser.User user_list = 3;
+}
+
+
+
+service RPCFollowService {
+  rpc FollowAction(FollowActionReq) returns (FollowActionResp) {}
+  rpc GetFollowList(FollowListReq) returns (FollowListResp) {}
+  rpc GetFollowerList(FollowerListReq) returns (FollowerListResp) {}
+}
