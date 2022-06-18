@@ -1,4 +1,4 @@
-package main
+package tests
 
 import (
 	"github.com/RaymondCode/simple-demo/controller"
@@ -24,6 +24,7 @@ func TestFeedHandler(t *testing.T) {
 	//向注册的路由发起请求
 	req, _ := http.NewRequest("GET", "/feed/"+"?token="+token, nil)
 	w := httptest.NewRecorder()
+
 	//模拟http服务处理请求
 	r.ServeHTTP(w, req)
 
