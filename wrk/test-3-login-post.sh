@@ -1,0 +1,1 @@
+wrk -t10 -c50 -d2s -s scripts/login.lua --latency http://localhost:8081/douyin/user/login/

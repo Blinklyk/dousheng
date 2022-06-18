@@ -22,7 +22,7 @@ func (*RpcUserService) Register(ctx context.Context, req *rpcUser.RegisterReques
 	password := req.Password
 
 	// call service
-	newUser := &model.User{Username: username, Password: password, FollowCount: 0, FollowerCount: 0}
+	newUser := &model.User{Name: req.Username, Username: username, Password: password, FollowCount: 0, FollowerCount: 0}
 	var userService = service.UserService{}
 	err, userReturn := userService.Register(newUser)
 	if err != nil {
@@ -30,15 +30,14 @@ func (*RpcUserService) Register(ctx context.Context, req *rpcUser.RegisterReques
 	}
 
 	// return
-	resp := &rpcUser.RegisterResponse{UserId: newUser.ID, Token: newUser.Name}
-	log.Println("server: register successfully!", userReturn.ID)
+	resp := &rpcUser.RegisterResponse{UserId: userReturn.ID, Token: newUser.Name}
 	return resp, nil
 }
 
 func (*RpcUserService) Login(ctx context.Context, req *rpcUser.LoginRequest) (*rpcUser.LoginResponse, error) {
 
 	// call service
-	user := &model.User{Username: req.Username, Password: req.Password}
+	user := &model.User{Name: req.Username, Username: req.Username, Password: req.Password}
 	var loginService = service.UserService{}
 	userReturn, tokenStr, err := loginService.Login(user)
 	if tokenStr == "" {

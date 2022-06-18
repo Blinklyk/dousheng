@@ -27,7 +27,6 @@ func (us *UserService) Register(user *model.User) (err error, newUser *model.Use
 	// 密码加密
 	user.Password = utils.BcryptHash(user.Password)
 	// 添加到数据库
-	log.Printf("%v\n", user)
 	err = global.App.DY_DB.Create(&user).Error
 	return err, user
 }

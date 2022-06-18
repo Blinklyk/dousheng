@@ -3,12 +3,16 @@ package main
 import (
 	"context"
 	"errors"
+	"github.com/RaymondCode/simple-demo/global"
 	"github.com/RaymondCode/simple-demo/initialize"
 	"github.com/RaymondCode/simple-demo/model/request"
 	"github.com/RaymondCode/simple-demo/pb/rpcVideo"
 	"github.com/RaymondCode/simple-demo/service"
 	"github.com/RaymondCode/simple-demo/utils/rpcdto"
+	"go.uber.org/zap"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"log"
 	"net"
 )
@@ -42,6 +46,17 @@ func (*RpcVideoService) Feed(ctx context.Context, req *rpcVideo.FeedReq) (*rpcVi
 	if token == "" {
 		feedList, err := fs.FeedWithoutToken()
 		if err != nil {
+			// 判断是否是超时错误
+			statusErr, ok := status.FromError(err)
+			if ok {
+				if statusErr.Code() == codes.DeadlineExceeded {
+					global.App.DY_LOG.Error("client.Search err: deadline", zap.Error(err))
+					log.Println("client.Search err: deadline ", zap.Error(err))
+				}
+			}
+			global.App.DY_LOG.Error("client.Search err: ", zap.Error(err))
+			log.Println("client.Search err: ", zap.Error(err))
+
 			return nil, errors.New("error:feed without token" + err.Error())
 		}
 		feedListRpcDTO := rpcdto.ToVideoListRpcDTO(*feedList)

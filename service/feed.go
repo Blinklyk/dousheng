@@ -53,7 +53,7 @@ func selectVideos() ([]model.Video, error) {
 	// TODO add the latest time
 	var videos []model.Video
 	if err := global.App.DY_DB.Preload("User").Order("ID desc").Find(&videos).Error; err != nil {
-		return nil, errors.New("error: select without token")
+		return nil, errors.New("error: feed select videos：" + err.Error())
 	}
 	return videos, nil
 }

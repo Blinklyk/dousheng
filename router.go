@@ -12,6 +12,9 @@ func initRouter(r *gin.Engine) {
 
 	apiRouter := r.Group("/douyin")
 
+	// test api
+	apiRouter.GET("/test/", controller.Test)
+
 	// basic apis
 	apiRouter.GET("/feed/", controller.Feed)
 	// user api
